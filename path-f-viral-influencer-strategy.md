@@ -21,14 +21,14 @@ Website berfungsi sebagai:
 
 | Opsi | Keterangan |
 |------|------------|
-| **buyback.id** | Langsung ke poin, mudah diingat |
+| **buyback.my.id** | Domain yang dipilih |
 | **kemasankembali.id** | Deskriptif, bahasa Indonesia |
 | **plastikbalik.id** | Catchy, clear message |
 | **daurulang.id** | Lebih luas dari sekedar buyback |
 | **greenid.org** | Umbrella organization |
 | **sampahkita.id** | Ownership feeling |
 
-*Rekomendasi: **buyback.id** atau **kemasankembali.id***
+*Domain: **buyback.my.id***
 
 ### Struktur Website
 
@@ -350,7 +350,7 @@ NEXT WEEK PLAN
 
 | Item | Cost | Note |
 |------|------|------|
-| Domain & hosting | Rp 500K/tahun | .id domain |
+| Domain & hosting | Rp 11K/tahun | buyback.my.id |
 | Design tools | Rp 0 | Canva free |
 | Content production | Rp 0 | DIY + volunteer |
 | Influencer | Rp 0 | Pro-bono only |

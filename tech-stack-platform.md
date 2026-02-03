@@ -34,7 +34,7 @@
 | Layer | Technology | Cost |
 |-------|------------|------|
 | **Static Hosting** | Cloudflare Pages | Free (unlimited bandwidth) |
-| **Domain** | .id domain | ~Rp 150-300K/tahun |
+| **Domain** | buyback.my.id | Rp 11K/tahun |
 
 ### API & Serverless Functions
 
@@ -146,7 +146,7 @@ crons = ["*/5 * * * *"]  # Every 5 minutes
 
 ```typescript
 // Serve R2 files via custom domain atau Cloudflare Pages
-// File akan accessible di: https://stats.buyback.id/leaderboard.json
+// File akan accessible di: https://stats.buyback.my.id/leaderboard.json
 ```
 
 ### Frontend Fetch
@@ -155,7 +155,7 @@ crons = ["*/5 * * * *"]  # Every 5 minutes
 // src/components/Leaderboard.astro
 ---
 // At build time atau client-side fetch
-const leaderboard = await fetch('https://stats.buyback.id/leaderboard.json')
+const leaderboard = await fetch('https://stats.buyback.my.id/leaderboard.json')
   .then(r => r.json());
 ---
 
@@ -200,7 +200,7 @@ const leaderboard = await fetch('https://stats.buyback.id/leaderboard.json')
 | Hosting | Cloudflare Pages | ✅ Final |
 | Functions | Cloudflare Workers | ✅ Final |
 | Storage | Cloudflare R2 | ✅ Final |
-| Domain | .id domain | ✅ Final |
+| Domain | buyback.my.id | ✅ Final |
 
 ---
 
@@ -414,19 +414,24 @@ CREATE INDEX idx_sessions_user ON sessions(user_id);
 | Cloudflare Workers | 100K req/day | ~50K | Rp 0 |
 | Cloudflare R2 | 10GB storage | ~1GB | Rp 0 |
 | **Turso** | **9GB DB, 1B reads/month** | ~100MB | **Rp 0** |
-| Domain (.id) | - | 1 domain | Rp 25K/bulan |
-| **Total** | | | **~Rp 25K/bulan** |
+| Domain (buyback.my.id) | - | 1 domain | Rp 11K/tahun |
+| **Total** | | | **~Rp 1K/bulan** |
 
 ### If Viral (Scaling Cost)
 
-| Scenario | Traffic | Turso Cost | Total Cost |
-|----------|---------|------------|------------|
-| Normal | 10K visits/month | Rp 0 | ~Rp 25K |
-| Growing | 100K visits/month | Rp 0 | ~Rp 25K |
-| Viral | 1M visits/month | ~Rp 50K | ~Rp 75K |
-| Mega Viral | 10M visits/month | ~Rp 150K | ~Rp 200K |
+Dengan R2 caching, database hanya di-query ~288 kali/hari (setiap 5 menit), **bukan per visitor**.
 
-*Turso + Cloudflare = sangat murah bahkan saat viral*
+| Scenario | Traffic | DB Queries/day | Monthly Cost |
+|----------|---------|----------------|--------------|
+| Normal | 10K visits/month | ~288 | ~Rp 1K |
+| Growing | 100K visits/month | ~288 | ~Rp 1K |
+| Viral | 1M visits/month | ~288 | ~Rp 1K |
+| Mega Viral | 10M visits/month | ~288 | ~Rp 1K |
+
+**Semua traffic level = cost sama** karena:
+- Cloudflare Pages: unlimited bandwidth (free)
+- Cloudflare R2: unlimited egress (free)
+- Turso: hanya cron job yang query, bukan visitors
 
 ---
 
@@ -680,11 +685,11 @@ export const db = drizzle(client, { schema });
 ## Summary
 
 **Total Setup Cost: < Rp 500K**
-- Domain: ~Rp 150-300K/tahun
+- Domain: Rp 11K/tahun
 - Everything else: Free tier
 
-**Monthly Running Cost: ~Rp 25K**
-- Hanya domain cost
+**Monthly Running Cost: ~Rp 1K**
+- Domain Rp 11K/tahun = ~Rp 1K/bulan
 
 **Time to MVP: 2 minggu**
 
