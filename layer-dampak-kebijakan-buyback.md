@@ -50,22 +50,19 @@ Dampak yang terjadi secara langsung dan immediate kepada stakeholder utama.
 
 ### Pemulung dan Pengepul Tradisional
 
-**Dampak POSITIF:**
+**Dampak:**
 - **Harga sampah plastik kemasan naik** karena ada floor price dari kewajiban buyback
 - Bargaining power lebih kuat dalam value chain
 - Bisa memilih: jual ke collection point atau ke pengepul dengan harga kompetitif
 - Volume bisnis berpotensi naik karena demand produsen pasti ada (kewajiban)
+- Tidak semua konsumen mau repot bawa kemasan sendiri → pemulung tetap dibutuhkan
+- Lebih efisien dalam volume pengumpulan dibanding konsumen individu
+- Tetap punya peran mengumpulkan dari jalanan, TPA, dan sungai
 
 **Peran Baru:**
 - Pengepul bisa jadi aggregator: kumpul dari pemulung, jual bulk ke produsen
 - Formalisasi pekerjaan dengan income lebih stabil dan tinggi
-- Tidak tersingkir, justru ter-leverage oleh sistem
-
-**Note Koreksi:** Berbeda dari asumsi awal bahwa pemulung tersingkir, realitanya mereka menjadi pemenang karena:
-1. Tidak semua konsumen mau repot bawa kemasan sendiri
-2. Pemulung lebih efisien dalam volume pengumpulan
-3. Mereka tetap punya peran mengumpulkan dari jalanan/TPA/sungai
-4. Value chain sampah jadi lebih formal dan profitable
+- Ter-leverage oleh sistem, value chain sampah jadi lebih formal dan profitable
 
 ---
 
