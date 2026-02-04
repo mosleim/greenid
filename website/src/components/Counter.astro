@@ -1,0 +1,63 @@
+---
+export interface Props {
+  supporters?: number;
+  impressions?: number;
+  politicians?: number;
+}
+
+const { 
+  supporters = 0, 
+  impressions = 0,
+  politicians = 0 
+} = Astro.props;
+
+function formatNumber(num: number): string {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1) + 'M';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1) + 'K';
+  }
+  return num.toLocaleString('id-ID');
+}
+---
+
+<div class="grid grid-cols-3 gap-4 md:gap-8" x-data="{ 
+  supporters: 0, 
+  impressions: 0, 
+  politicians: 0,
+  async fetchStats() {
+    try {
+      const res = await fetch('/api/stats');
+      const data = await res.json();
+      this.supporters = data.supporters || 0;
+      this.impressions = data.impressions || 0;
+      this.politicians = data.politicians || 0;
+    } catch (e) {
+      console.error('Failed to fetch stats');
+    }
+  }
+}" x-init="fetchStats()">
+  
+  <div class="text-center">
+    <div class="text-3xl md:text-5xl font-display font-bold text-primary-600" x-text="supporters.toLocaleString('id-ID')">
+      {formatNumber(supporters)}
+    </div>
+    <div class="text-sm md:text-base text-gray-600 mt-1">Pendukung</div>
+  </div>
+  
+  <div class="text-center">
+    <div class="text-3xl md:text-5xl font-display font-bold text-accent-600" x-text="impressions >= 1000000 ? (impressions / 1000000).toFixed(1) + 'M' : impressions >= 1000 ? (impressions / 1000).toFixed(1) + 'K' : impressions.toLocaleString('id-ID')">
+      {formatNumber(impressions)}
+    </div>
+    <div class="text-sm md:text-base text-gray-600 mt-1">Impressions</div>
+  </div>
+  
+  <div class="text-center">
+    <div class="text-3xl md:text-5xl font-display font-bold text-yellow-600" x-text="politicians.toLocaleString('id-ID')">
+      {formatNumber(politicians)}
+    </div>
+    <div class="text-sm md:text-base text-gray-600 mt-1">Pejabat Merespons</div>
+  </div>
+  
+</div>

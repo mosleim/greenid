@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Mock statistics - akan diganti dengan data dari R2 cache
+const stats = {
+  totalRecycled: 25840000, // kg
+  totalParticipants: 1250000,
+  totalRevenueGenerated: 38500000000, // Rp
+  wasteReduction: 12.5, // %
+  monthlyGrowth: 15.3, // %
+};
+
+const monthlyData = [
+  { month: 'Jan', recycled: 1500000 },
+  { month: 'Feb', recycled: 1800000 },
+  { month: 'Mar', recycled: 2100000 },
+  { month: 'Apr', recycled: 2400000 },
+  { month: 'Mei', recycled: 2800000 },
+  { month: 'Jun', recycled: 3200000 },
+];
+
+const wasteComposition = [
+  { type: 'PET (Botol Minum)', percentage: 45, color: '#22C55E' },
+  { type: 'HDPE (Botol Sabun)', percentage: 25, color: '#3B82F6' },
+  { type: 'PP (Kemasan Makanan)', percentage: 18, color: '#F59E0B' },
+  { type: 'LDPE (Kantong Plastik)', percentage: 8, color: '#8B5CF6' },
+  { type: 'Lainnya', percentage: 4, color: '#6B7280' },
+];
+
+const researchSources = [
+  {
+    title: 'Plastic Pollution in Indonesia',
+    source: 'World Bank',
+    year: 2023,
+    keyFinding: 'Indonesia merupakan penghasil sampah plastik terbesar kedua di dunia.',
+    url: 'https://www.worldbank.org/en/country/indonesia/publication/plastic-pollution-in-indonesia'
+  },
+  {
+    title: 'Extended Producer Responsibility Implementation',
+    source: 'KLHK',
+    year: 2024,
+    keyFinding: 'Implementasi EPR dapat mengurangi sampah plastik ke TPA sebesar 30%.',
+    url: '#'
+  },
+  {
+    title: 'Economic Impact of Recycling Industry',
+    source: 'McKinsey & Company',
+    year: 2022,
+    keyFinding: 'Industri daur ulang berpotensi menciptakan 500.000 lapangan kerja baru.',
+    url: '#'
+  },
+];
+
+function formatNumber(num: number) {
+  if (num >= 1000000000) return (num / 1000000000).toFixed(1) + ' M';
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + ' juta';
+  if (num >= 1000) return (num / 1000).toFixed(1) + ' ribu';
+  return num.toString();
+}
+---
+
+<BaseLayout 
+  title="Data & Statistik" 
+  description="Data terkini dan riset tentang pengelolaan sampah plastik serta potensi kebijakan buyback di Indonesia."
+>
+  <Header />
+  
+  <main>
+    <!-- Hero -->
+    <section class="section bg-gradient-to-br from-blue-50 to-white">
+      <div class="container-wide">
+        <div class="text-center mb-12">
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Data & Statistik
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Fakta, angka, dan riset terkait pengelolaan sampah plastik di Indonesia.
+          </p>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="card text-center">
+            <div class="text-3xl mb-2">🗑️</div>
+            <div class="font-display font-bold text-2xl text-primary-600">{formatNumber(stats.totalRecycled)} kg</div>
+            <div class="text-sm text-gray-600">Plastik Didaur Ulang</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl mb-2">👥</div>
+            <div class="font-display font-bold text-2xl text-primary-600">{formatNumber(stats.totalParticipants)}</div>
+            <div class="text-sm text-gray-600">Partisipan</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl mb-2">💰</div>
+            <div class="font-display font-bold text-2xl text-primary-600">Rp {formatNumber(stats.totalRevenueGenerated)}</div>
+            <div class="text-sm text-gray-600">Nilai Ekonomi Tercipta</div>
+          </div>
+          <div class="card text-center">
+            <div class="text-3xl mb-2">📈</div>
+            <div class="font-display font-bold text-2xl text-green-600">+{stats.monthlyGrowth}%</div>
+            <div class="text-sm text-gray-600">Pertumbuhan Bulanan</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Charts Section -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Tren Daur Ulang
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Monthly Trend Chart -->
+          <div class="card">
+            <h3 class="font-semibold text-lg mb-4">Volume Daur Ulang Bulanan</h3>
+            <div class="h-64 flex items-end justify-between gap-2 px-4">
+              {monthlyData.map(item => {
+                const maxRecycled = Math.max(...monthlyData.map(d => d.recycled));
+                const heightPercent = (item.recycled / maxRecycled) * 100;
+                
+                return (
+                  <div class="flex flex-col items-center flex-1">
+                    <div 
+                      class="w-full bg-primary-500 rounded-t-lg transition-all hover:bg-primary-600" 
+                      style={`height: ${heightPercent}%`}
+                      title={`${formatNumber(item.recycled)} kg`}
+                    />
+                    <span class="text-xs text-gray-600 mt-2">{item.month}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <p class="text-xs text-gray-500 mt-4 text-center">Data simulasi untuk demonstrasi</p>
+          </div>
+          
+          <!-- Composition Chart -->
+          <div class="card">
+            <h3 class="font-semibold text-lg mb-4">Komposisi Sampah Plastik</h3>
+            <div class="space-y-3">
+              {wasteComposition.map(item => (
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>{item.type}</span>
+                    <span class="font-medium">{item.percentage}%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div 
+                      class="h-3 rounded-full transition-all" 
+                      style={`width: ${item.percentage}%; background-color: ${item.color}`}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Key Facts -->
+    <section class="section bg-gray-50">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Fakta Kunci
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card border-l-4 border-red-500">
+            <div class="text-4xl font-display font-bold text-red-600 mb-2">6.8 juta</div>
+            <div class="text-gray-800 font-medium mb-2">Ton Sampah Plastik/Tahun</div>
+            <p class="text-sm text-gray-600">
+              Indonesia menghasilkan 6.8 juta ton sampah plastik setiap tahun, 
+              meningkat 5% setiap tahunnya.
+            </p>
+          </div>
+          
+          <div class="card border-l-4 border-orange-500">
+            <div class="text-4xl font-display font-bold text-orange-600 mb-2">11%</div>
+            <div class="text-gray-800 font-medium mb-2">Tingkat Daur Ulang</div>
+            <p class="text-sm text-gray-600">
+              Hanya 11% sampah plastik di Indonesia yang berhasil didaur ulang. 
+              Sisanya berakhir di TPA atau lingkungan.
+            </p>
+          </div>
+          
+          <div class="card border-l-4 border-green-500">
+            <div class="text-4xl font-display font-bold text-green-600 mb-2">Rp 150T</div>
+            <div class="text-gray-800 font-medium mb-2">Potensi Nilai Ekonomi</div>
+            <p class="text-sm text-gray-600">
+              Potensi nilai ekonomi dari industri daur ulang plastik di Indonesia 
+              mencapai Rp 150 triliun per tahun.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Research Sources -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Sumber Riset
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          {researchSources.map(research => (
+            <div class="card">
+              <div class="text-xs text-gray-500 mb-2">{research.source} • {research.year}</div>
+              <h3 class="font-semibold text-lg mb-3">{research.title}</h3>
+              <p class="text-gray-600 text-sm mb-4">{research.keyFinding}</p>
+              <a 
+                href={research.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-primary-600 text-sm hover:underline"
+              >
+                Baca selengkapnya →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Infographic Download -->
+    <section class="section bg-primary-600">
+      <div class="container-narrow text-center">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">
+          Download Infografis
+        </h2>
+        <p class="text-primary-100 mb-8 max-w-xl mx-auto">
+          Dapatkan infografis lengkap tentang pengelolaan sampah plastik untuk dibagikan 
+          atau digunakan dalam presentasi.
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/downloads/infografis-buyback.pdf" class="btn bg-white text-primary-700 hover:bg-primary-50">
+            📊 Infografis Data
+          </a>
+          <a href="/downloads/fact-sheet-buyback.pdf" class="btn bg-white text-primary-700 hover:bg-primary-50">
+            📄 Fact Sheet
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Tentang Gerakan" 
+  description="Pelajari tentang kebijakan buyback kemasan plastik dan bagaimana gerakan ini dapat mengubah Indonesia menjadi lebih bersih dan berkelanjutan."
+>
+  <Header />
+  
+  <main>
+    <!-- Hero -->
+    <section class="section bg-gradient-to-br from-primary-50 to-white">
+      <div class="container-narrow text-center">
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Tentang Gerakan Buyback
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Mendorong kebijakan buyback kemasan plastik untuk Indonesia yang lebih bersih, sejahtera, dan berkelanjutan.
+        </p>
+      </div>
+    </section>
+    
+    <!-- What is Buyback -->
+    <section class="section bg-white">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+          Apa itu Kebijakan Buyback?
+        </h2>
+        
+        <div class="prose prose-lg max-w-none">
+          <p>
+            <strong>Kebijakan buyback kemasan</strong> adalah sistem di mana produsen wajib membeli kembali kemasan produk mereka dari konsumen dengan harga tertentu (biasanya 3-5% dari harga produk).
+          </p>
+          
+          <p>
+            Sistem ini sudah berhasil diterapkan di banyak negara maju seperti Jerman, Korea Selatan, Norwegia, dan negara-negara Uni Eropa lainnya dengan tingkat pengembalian kemasan mencapai <strong>90% atau lebih</strong>.
+          </p>
+          
+          <div class="bg-primary-50 rounded-xl p-6 my-8">
+            <h3 class="text-primary-800 font-semibold text-lg mb-3">Contoh Perhitungan</h3>
+            <ul class="text-primary-700 space-y-2">
+              <li>1 botol air mineral 600ml (Rp 3.000) → cashback <strong>Rp 90-150</strong></li>
+              <li>1 botol minuman 1.5L (Rp 8.000) → cashback <strong>Rp 240-400</strong></li>
+              <li>1 sachet shampo (Rp 1.000) → cashback <strong>Rp 30-50</strong></li>
+              <li>Keluarga dengan 50 kemasan/bulan → potensi <strong>Rp 50.000-100.000/bulan</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Why Indonesia Needs This -->
+    <section class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+          Mengapa Indonesia Membutuhkan Ini?
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="card">
+            <div class="text-3xl mb-3">🌊</div>
+            <h3 class="font-semibold text-lg mb-2">Krisis Sampah Plastik</h3>
+            <p class="text-gray-600">
+              Indonesia adalah penyumbang sampah plastik ke laut terbesar kedua di dunia. 
+              Lebih dari 3 juta ton plastik masuk ke lingkungan setiap tahun.
+            </p>
+          </div>
+          
+          <div class="card">
+            <div class="text-3xl mb-3">💸</div>
+            <h3 class="font-semibold text-lg mb-2">Potensi Ekonomi Terbuang</h3>
+            <p class="text-gray-600">
+              Nilai ekonomi sampah plastik yang terbuang mencapai triliunan rupiah per tahun. 
+              Dengan buyback, nilai ini bisa dikembalikan ke masyarakat.
+            </p>
+          </div>
+          
+          <div class="card">
+            <div class="text-3xl mb-3">🧹</div>
+            <h3 class="font-semibold text-lg mb-2">Nasib Pemulung</h3>
+            <p class="text-gray-600">
+              Jutaan pemulung bergantung pada sampah untuk hidup dengan pendapatan tidak menentu. 
+              Buyback memberikan harga yang lebih stabil dan layak.
+            </p>
+          </div>
+          
+          <div class="card">
+            <div class="text-3xl mb-3">🏛️</div>
+            <h3 class="font-semibold text-lg mb-2">Beban Pemerintah</h3>
+            <p class="text-gray-600">
+              Pemerintah daerah menghabiskan anggaran besar untuk pengelolaan sampah. 
+              Dengan buyback, beban ini bisa dikurangi signifikan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Who Benefits -->
+    <section class="section bg-white">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+          Siapa yang Diuntungkan?
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="flex gap-4 items-start p-6 bg-green-50 rounded-xl">
+            <div class="text-3xl">👨‍👩‍👧‍👦</div>
+            <div>
+              <h3 class="font-semibold text-lg text-green-800 mb-2">Konsumen & Rumah Tangga</h3>
+              <p class="text-green-700">
+                Mendapat insentif ekonomi dari kemasan bekas. Untuk keluarga dengan konsumsi tinggi produk packaged, 
+                bisa menghemat Rp 50.000-100.000 per bulan.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start p-6 bg-blue-50 rounded-xl">
+            <div class="text-3xl">🧹</div>
+            <div>
+              <h3 class="font-semibold text-lg text-blue-800 mb-2">Pemulung & Pengepul</h3>
+              <p class="text-blue-700">
+                Harga sampah plastik naik karena ada floor price dari kewajiban buyback. 
+                Bargaining power lebih kuat, income lebih stabil, pekerjaan lebih terformalisasi.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start p-6 bg-purple-50 rounded-xl">
+            <div class="text-3xl">🏪</div>
+            <div>
+              <h3 class="font-semibold text-lg text-purple-800 mb-2">Retailer & Warung</h3>
+              <p class="text-purple-700">
+                Mendapat fee handling sebagai collection point. Potensi peningkatan traffic 
+                konsumen ke toko karena mereka datang untuk mengembalikan kemasan.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start p-6 bg-orange-50 rounded-xl">
+            <div class="text-3xl">🏭</div>
+            <div>
+              <h3 class="font-semibold text-lg text-orange-800 mb-2">Industri Daur Ulang</h3>
+              <p class="text-orange-700">
+                Pasokan bahan baku plastik lebih stabil, berkualitas, dan tersortir. 
+                Kontrak jangka panjang dengan produsen lebih feasible.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start p-6 bg-emerald-50 rounded-xl">
+            <div class="text-3xl">🌊</div>
+            <div>
+              <h3 class="font-semibold text-lg text-emerald-800 mb-2">Lingkungan</h3>
+              <p class="text-emerald-700">
+                Pengurangan drastis sampah plastik di laut, sungai, dan TPA. 
+                Indonesia bisa keluar dari daftar negara penyumbang sampah plastik terbesar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+          Pertanyaan yang Sering Diajukan
+        </h2>
+        
+        <div class="space-y-4" x-data="{ openFaq: null }">
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 1 ? null : 1"
+            >
+              <span class="font-semibold">Apakah harga produk akan naik?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 1" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Kenaikan harga produk sangat minimal (3-5%), dan konsumen bisa mendapatkan uang itu kembali 
+                dengan mengembalikan kemasan. Jadi secara net, tidak ada kenaikan biaya untuk konsumen yang aktif berpartisipasi.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 2 ? null : 2"
+            >
+              <span class="font-semibold">Bagaimana dengan UMKM dan warung kecil?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 2" x-collapse class="mt-4 text-gray-600">
+              <p>
+                UMKM bisa menjadi collection point dan mendapat fee handling. Sistem bisa didesain dengan threshold 
+                sehingga UMKM kecil tidak terbebani biaya buyback langsung, tapi tetap bisa berpartisipasi sebagai collector.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 3 ? null : 3"
+            >
+              <span class="font-semibold">Apakah pemulung akan tersingkir?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 3" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Justru sebaliknya. Pemulung menjadi pemenang karena: (1) Harga sampah naik dengan floor price dari buyback, 
+                (2) Tidak semua konsumen mau repot bawa kemasan sendiri, (3) Pemulung lebih efisien dalam volume pengumpulan, 
+                (4) Mereka tetap punya peran mengumpulkan dari jalanan, TPA, dan sungai.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 4 ? null : 4"
+            >
+              <span class="font-semibold">Negara mana saja yang sudah menerapkan?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 4" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Sistem deposit-return (DRS) sudah diterapkan di banyak negara: Jerman (97% return rate), 
+                Norwegia (92%), Korea Selatan (70%+), dan sedang diimplementasikan di seluruh Uni Eropa. 
+                Bahkan beberapa negara ASEAN seperti Malaysia sudah mulai pilot project.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 5 ? null : 5"
+            >
+              <span class="font-semibold">Bagaimana cara saya berkontribusi?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 5 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 5" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Ada banyak cara: (1) Daftar sebagai pendukung di website ini, (2) Share informasi di media sosial, 
+                (3) Hubungi wakil rakyat Anda di DPR, (4) Diskusikan dengan keluarga dan teman. 
+                Setiap suara penting untuk mendorong perubahan kebijakan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="section bg-primary-600">
+      <div class="container-narrow text-center">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-6">
+          Siap Bergabung?
+        </h2>
+        <p class="text-primary-100 mb-8 max-w-xl mx-auto">
+          Dukung gerakan buyback kemasan plastik dan jadilah bagian dari perubahan.
+        </p>
+        <a href="/bergabung" class="btn bg-white text-primary-700 hover:bg-primary-50 px-8 py-4">
+          Bergabung Sekarang
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Alpine.js collapse plugin alternative using CSS
+  document.addEventListener('alpine:init', () => {
+    Alpine.directive('collapse', (el, { expression }, { evaluate }) => {
+      // Simple show/hide without animation
+    });
+  });
+</script>

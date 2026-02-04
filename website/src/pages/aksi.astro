@@ -1,0 +1,452 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const shareTemplates = {
+  twitter: {
+    text: '🌿 Indonesia butuh kebijakan buyback kemasan plastik. Ini bukan cuma soal lingkungan, tapi juga ekonomi rakyat. Yuk dukung gerakan ini bersama.',
+    hashtags: 'BuybackKemasan,IndonesiaBersih,ZeroWaste',
+  },
+  instagram: {
+    caption: `🌿 BUYBACK KEMASAN PLASTIK
+
+Indonesia menghasilkan 6.8 juta ton sampah plastik per tahun. Hanya 11% yang didaur ulang.
+
+Kebijakan buyback bisa:
+✅ Mengurangi sampah plastik ke TPA
+✅ Menciptakan lapangan kerja
+✅ Meningkatkan pendapatan pemulung
+✅ Membangun ekonomi sirkular
+
+Yuk dukung gerakan ini.
+
+#BuybackKemasan #IndonesiaBersih #ZeroWaste #EkonomiSirkular`,
+  },
+  whatsapp: {
+    text: `🌿 *Tahukah kamu?*
+
+Indonesia menghasilkan 6.8 juta ton sampah plastik per tahun, tapi hanya 11% yang didaur ulang.
+
+Kebijakan buyback kemasan plastik bisa:
+✅ Mengurangi sampah ke TPA
+✅ Menciptakan lapangan kerja baru
+✅ Meningkatkan pendapatan pemulung
+
+Yuk dukung gerakan ini: https://buyback.my.id`,
+  },
+};
+
+const downloadAssets = [
+  {
+    title: 'Social Media Kit',
+    description: 'Template posting untuk Instagram, Twitter, dan WhatsApp',
+    icon: '📱',
+    filename: 'social-media-kit.zip',
+    size: '15 MB',
+  },
+  {
+    title: 'Infografis',
+    description: 'Infografis data sampah plastik Indonesia',
+    icon: '📊',
+    filename: 'infografis-buyback.pdf',
+    size: '2.5 MB',
+  },
+  {
+    title: 'Fact Sheet',
+    description: 'Lembar fakta tentang kebijakan buyback',
+    icon: '📄',
+    filename: 'fact-sheet-buyback.pdf',
+    size: '500 KB',
+  },
+  {
+    title: 'Poster Campaign',
+    description: 'Poster siap cetak untuk kampanye offline',
+    icon: '🖼️',
+    filename: 'poster-campaign.zip',
+    size: '25 MB',
+  },
+];
+
+const contactOptions = [
+  {
+    platform: 'Email',
+    icon: '📧',
+    value: 'info@buyback.my.id',
+    url: 'mailto:info@buyback.my.id',
+  },
+  {
+    platform: 'Instagram',
+    icon: '📸',
+    value: '@buyback.id',
+    url: 'https://instagram.com/buyback.id',
+  },
+  {
+    platform: 'Twitter/X',
+    icon: '🐦',
+    value: '@buyback_id',
+    url: 'https://twitter.com/buyback_id',
+  },
+];
+---
+
+<BaseLayout 
+  title="Aksi Nyata" 
+  description="Cara mudah untuk turut mendukung kebijakan buyback kemasan plastik di Indonesia."
+>
+  <Header />
+  
+  <main>
+    <!-- Hero -->
+    <section class="section bg-gradient-to-br from-green-50 to-white">
+      <div class="container-wide">
+        <div class="text-center mb-12">
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Aksi Nyata
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Setiap aksi kecil berdampak besar. Pilih cara yang paling cocok untuk kamu.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Action Steps -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          3 Langkah Mudah
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1: Share -->
+          <div class="card text-center">
+            <div class="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center text-3xl mb-4">
+              📣
+            </div>
+            <div class="text-xs font-bold text-primary-600 mb-2">LANGKAH 1</div>
+            <h3 class="font-display font-bold text-xl mb-3">Sebarkan</h3>
+            <p class="text-gray-600 mb-4">
+              Share informasi ke media sosial kamu. Makin banyak yang tahu, makin besar dampaknya.
+            </p>
+            <a href="#share" class="btn btn-primary w-full">
+              Mulai Share
+            </a>
+          </div>
+          
+          <!-- Step 2: Support -->
+          <div class="card text-center">
+            <div class="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center text-3xl mb-4">
+              ✊
+            </div>
+            <div class="text-xs font-bold text-primary-600 mb-2">LANGKAH 2</div>
+            <h3 class="font-display font-bold text-xl mb-3">Dukung</h3>
+            <p class="text-gray-600 mb-4">
+              Tambahkan dukungan kamu. Setiap suara dihitung dan ditampilkan secara publik.
+            </p>
+            <a href="#dukung" class="btn btn-primary w-full">
+              Dukung Sekarang
+            </a>
+          </div>
+          
+          <!-- Step 3: Report -->
+          <div class="card text-center">
+            <div class="w-16 h-16 mx-auto bg-primary-100 rounded-full flex items-center justify-center text-3xl mb-4">
+              📢
+            </div>
+            <div class="text-xs font-bold text-primary-600 mb-2">LANGKAH 3</div>
+            <h3 class="font-display font-bold text-xl mb-3">Laporkan</h3>
+            <p class="text-gray-600 mb-4">
+              Temukan pernyataan pejabat terkait buyback? Laporkan ke kami untuk diverifikasi.
+            </p>
+            <a href="#lapor" class="btn btn-primary w-full">
+              Laporkan
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Share Section -->
+    <section id="share" class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Template Share
+        </h2>
+        
+        <div class="space-y-6">
+          <!-- Twitter -->
+          <div class="card" x-data="{ copied: false }">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xl">🐦</span>
+              <h3 class="font-semibold">Twitter / X</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg text-sm mb-4">
+              <p>{shareTemplates.twitter.text}</p>
+              <p class="text-primary-600 mt-2">#{shareTemplates.twitter.hashtags.split(',').join(' #')}</p>
+            </div>
+            <div class="flex gap-2">
+              <button 
+                class="btn btn-secondary flex-1"
+                @click={`navigator.clipboard.writeText('${shareTemplates.twitter.text} #${shareTemplates.twitter.hashtags.replace(/,/g, ' #')}'); copied = true; setTimeout(() => copied = false, 2000)`}
+              >
+                <span x-show="!copied">📋 Copy Text</span>
+                <span x-show="copied">✅ Copied</span>
+              </button>
+              <a 
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTemplates.twitter.text)}&hashtags=${shareTemplates.twitter.hashtags}&url=https://buyback.my.id`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary flex-1"
+              >
+                Post ke Twitter
+              </a>
+            </div>
+          </div>
+          
+          <!-- Instagram -->
+          <div class="card" x-data="{ copied: false }">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xl">📸</span>
+              <h3 class="font-semibold">Instagram</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg text-sm mb-4 whitespace-pre-line">
+              {shareTemplates.instagram.caption}
+            </div>
+            <button 
+              class="btn btn-secondary w-full"
+              @click={`navigator.clipboard.writeText(\`${shareTemplates.instagram.caption.replace(/`/g, '\\`')}\`); copied = true; setTimeout(() => copied = false, 2000)`}
+            >
+              <span x-show="!copied">📋 Copy Caption</span>
+              <span x-show="copied">✅ Copied</span>
+            </button>
+          </div>
+          
+          <!-- WhatsApp -->
+          <div class="card">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xl">💬</span>
+              <h3 class="font-semibold">WhatsApp</h3>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg text-sm mb-4 whitespace-pre-line">
+              {shareTemplates.whatsapp.text}
+            </div>
+            <a 
+              href={`https://wa.me/?text=${encodeURIComponent(shareTemplates.whatsapp.text)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn bg-green-500 text-white hover:bg-green-600 w-full"
+            >
+              Share via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Support Form -->
+    <section id="dukung" class="section bg-white">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Tambahkan Dukungan
+        </h2>
+        
+        <form 
+          class="card max-w-lg mx-auto"
+          x-data="{ loading: false, success: false }"
+          @submit.prevent="loading = true; setTimeout(() => { loading = false; success = true; }, 1000)"
+        >
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Nama Lengkap
+              </label>
+              <input 
+                type="text" 
+                name="name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Masukkan nama kamu"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input 
+                type="email" 
+                name="email"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="email@contoh.com"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Kota/Kabupaten
+              </label>
+              <input 
+                type="text" 
+                name="city"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Contoh: Jakarta Selatan"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Pesan Dukungan (Opsional)
+              </label>
+              <textarea 
+                name="message"
+                rows="3"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Tuliskan alasan kamu mendukung kebijakan ini..."
+              ></textarea>
+            </div>
+            
+            <div class="flex items-start gap-2">
+              <input type="checkbox" id="consent" required class="mt-1" />
+              <label for="consent" class="text-sm text-gray-600">
+                Saya setuju nama saya ditampilkan di daftar pendukung publik
+              </label>
+            </div>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="btn btn-primary w-full mt-6"
+            :disabled="loading"
+          >
+            <span x-show="!loading && !success">Dukung Sekarang</span>
+            <span x-show="loading">Memproses...</span>
+            <span x-show="success">✅ Terima kasih atas dukungannya</span>
+          </button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Report Form -->
+    <section id="lapor" class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Laporkan Pernyataan Pejabat
+        </h2>
+        
+        <form class="card max-w-lg mx-auto">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Nama Pejabat
+              </label>
+              <input 
+                type="text" 
+                name="politician_name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Contoh: Menteri X"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Link Sumber
+              </label>
+              <input 
+                type="url" 
+                name="source_url"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="https://..."
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Kutipan Pernyataan
+              </label>
+              <textarea 
+                name="quote"
+                rows="3"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Tuliskan kutipan pernyataan yang relevan..."
+              ></textarea>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Email Kamu (untuk follow-up)
+              </label>
+              <input 
+                type="email" 
+                name="reporter_email"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="email@contoh.com"
+              />
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-full mt-6">
+            Kirim Laporan
+          </button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Download Assets -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Download Materi Kampanye
+        </h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {downloadAssets.map(asset => (
+            <div class="card text-center">
+              <div class="text-4xl mb-3">{asset.icon}</div>
+              <h3 class="font-semibold mb-2">{asset.title}</h3>
+              <p class="text-sm text-gray-600 mb-4">{asset.description}</p>
+              <a 
+                href={`/downloads/${asset.filename}`}
+                class="btn btn-secondary w-full text-sm"
+              >
+                Download ({asset.size})
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="section bg-primary-600">
+      <div class="container-narrow text-center">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-6">
+          Ada Pertanyaan?
+        </h2>
+        <p class="text-primary-100 mb-8">
+          Hubungi kami melalui channel berikut
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          {contactOptions.map(contact => (
+            <a 
+              href={contact.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors"
+            >
+              <span class="text-xl">{contact.icon}</span>
+              <span>{contact.value}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

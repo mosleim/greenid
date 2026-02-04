@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const membershipTypes = [
+  {
+    id: 'supporter',
+    title: 'Supporter',
+    icon: '🙋',
+    description: 'Dukung gerakan ini dengan menambahkan nama kamu ke daftar pendukung publik.',
+    benefits: [
+      'Nama ditampilkan di halaman pendukung',
+      'Update berkala via email',
+      'Badge digital supporter',
+    ],
+    cta: 'Menjadi Supporter',
+  },
+  {
+    id: 'volunteer',
+    title: 'Volunteer',
+    icon: '🤝',
+    description: 'Bantu kami dengan skill kamu - desain, content, riset, atau koordinasi.',
+    benefits: [
+      'Semua benefit Supporter',
+      'Akses grup koordinasi',
+      'Sertifikat volunteer',
+      'Networking dengan aktivis lain',
+    ],
+    cta: 'Daftar Volunteer',
+  },
+  {
+    id: 'organization',
+    title: 'Organisasi',
+    icon: '🏢',
+    description: 'Organisasi, komunitas, atau perusahaan yang ingin mendukung gerakan ini.',
+    benefits: [
+      'Logo ditampilkan di halaman mitra',
+      'Co-branding campaign',
+      'Laporan impact bulanan',
+      'Konsultasi implementasi',
+    ],
+    cta: 'Hubungi Kami',
+  },
+];
+
+const volunteerRoles = [
+  { role: 'Content Creator', skills: 'Desain, video, copywriting', needed: 3 },
+  { role: 'Social Media Manager', skills: 'Instagram, TikTok, Twitter', needed: 2 },
+  { role: 'Research Analyst', skills: 'Riset, data analysis', needed: 2 },
+  { role: 'Web Developer', skills: 'Astro, TypeScript, Tailwind', needed: 1 },
+  { role: 'Community Organizer', skills: 'Event, koordinasi', needed: 3 },
+];
+---
+
+<BaseLayout 
+  title="Bergabung" 
+  description="Bergabung bersama gerakan buyback kemasan plastik Indonesia."
+>
+  <Header />
+  
+  <main>
+    <!-- Hero -->
+    <section class="section bg-gradient-to-br from-primary-50 to-white">
+      <div class="container-wide">
+        <div class="text-center mb-12">
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Bergabung Bersama Kami
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Pilih cara yang paling cocok untuk berkontribusi dalam gerakan ini.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Membership Types -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <div class="grid md:grid-cols-3 gap-8">
+          {membershipTypes.map((type, index) => (
+            <div class={`card relative ${index === 1 ? 'border-2 border-primary-500 md:-mt-4 md:mb-4' : ''}`}>
+              {index === 1 && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span class="bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    POPULER
+                  </span>
+                </div>
+              )}
+              
+              <div class="text-center mb-6">
+                <div class="text-5xl mb-4">{type.icon}</div>
+                <h3 class="font-display font-bold text-2xl mb-2">{type.title}</h3>
+                <p class="text-gray-600">{type.description}</p>
+              </div>
+              
+              <ul class="space-y-3 mb-8">
+                {type.benefits.map(benefit => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-green-500">✓</span>
+                    <span class="text-gray-700">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              <a 
+                href={`#form-${type.id}`}
+                class={`btn w-full ${index === 1 ? 'btn-primary' : 'btn-secondary'}`}
+              >
+                {type.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Supporter Form -->
+    <section id="form-supporter" class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Daftar Sebagai Supporter
+        </h2>
+        
+        <form 
+          class="card max-w-lg mx-auto"
+          x-data="{ loading: false, success: false }"
+          @submit.prevent="loading = true; setTimeout(() => { loading = false; success = true; }, 1000)"
+        >
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Nama Lengkap *
+              </label>
+              <input 
+                type="text" 
+                name="name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Email *
+              </label>
+              <input 
+                type="email" 
+                name="email"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Kota/Kabupaten
+              </label>
+              <input 
+                type="text" 
+                name="city"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Kenapa kamu mendukung kebijakan ini?
+              </label>
+              <textarea 
+                name="reason"
+                rows="3"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              ></textarea>
+            </div>
+            
+            <div class="flex items-start gap-2">
+              <input type="checkbox" id="supporter-consent" required class="mt-1" />
+              <label for="supporter-consent" class="text-sm text-gray-600">
+                Saya setuju nama saya ditampilkan di daftar pendukung publik dan menerima email update
+              </label>
+            </div>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="btn btn-primary w-full mt-6"
+            :disabled="loading"
+          >
+            <span x-show="!loading && !success">Daftar Sebagai Supporter</span>
+            <span x-show="loading">Memproses...</span>
+            <span x-show="success">✅ Selamat bergabung.</span>
+          </button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Volunteer Form -->
+    <section id="form-volunteer" class="section bg-white">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-4 text-center">
+          Daftar Sebagai Volunteer
+        </h2>
+        
+        <!-- Open Positions -->
+        <div class="bg-primary-50 rounded-xl p-6 mb-8 max-w-lg mx-auto">
+          <h3 class="font-semibold mb-4">Posisi yang Dibutuhkan:</h3>
+          <div class="space-y-2">
+            {volunteerRoles.map(role => (
+              <div class="flex items-center justify-between text-sm">
+                <div>
+                  <span class="font-medium">{role.role}</span>
+                  <span class="text-gray-500 ml-2">({role.skills})</span>
+                </div>
+                <span class="badge bg-primary-100 text-primary-700">
+                  {role.needed} orang
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <form class="card max-w-lg mx-auto">
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Nama Lengkap *
+                </label>
+                <input 
+                  type="text" 
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Email *
+                </label>
+                <input 
+                  type="email" 
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                No. WhatsApp *
+              </label>
+              <input 
+                type="tel" 
+                name="whatsapp"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="08xxxxxxxxxx"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Posisi yang Diminati *
+              </label>
+              <select 
+                name="role"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Pilih posisi...</option>
+                {volunteerRoles.map(role => (
+                  <option value={role.role}>{role.role}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Link Portfolio / Social Media
+              </label>
+              <input 
+                type="url" 
+                name="portfolio"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="https://..."
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Waktu yang bisa kamu luangkan per minggu
+              </label>
+              <select 
+                name="availability"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Pilih...</option>
+                <option value="1-2">1-2 jam</option>
+                <option value="3-5">3-5 jam</option>
+                <option value="5-10">5-10 jam</option>
+                <option value="10+">10+ jam</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Ceritakan tentang dirimu dan motivasimu
+              </label>
+              <textarea 
+                name="motivation"
+                rows="4"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              ></textarea>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-full mt-6">
+            Daftar Sebagai Volunteer
+          </button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Organization Form -->
+    <section id="form-organization" class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Kemitraan Organisasi
+        </h2>
+        
+        <form class="card max-w-lg mx-auto">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Nama Organisasi *
+              </label>
+              <input 
+                type="text" 
+                name="org_name"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Jenis Organisasi *
+              </label>
+              <select 
+                name="org_type"
+                required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="">Pilih...</option>
+                <option value="ngo">NGO / Yayasan</option>
+                <option value="community">Komunitas</option>
+                <option value="company">Perusahaan</option>
+                <option value="government">Instansi Pemerintah</option>
+                <option value="academic">Akademisi / Universitas</option>
+                <option value="media">Media</option>
+                <option value="other">Lainnya</option>
+              </select>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Nama PIC *
+                </label>
+                <input 
+                  type="text" 
+                  name="pic_name"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Email PIC *
+                </label>
+                <input 
+                  type="email" 
+                  name="pic_email"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Website Organisasi
+              </label>
+              <input 
+                type="url" 
+                name="website"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="https://..."
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Bentuk kemitraan yang diinginkan
+              </label>
+              <textarea 
+                name="partnership_type"
+                rows="3"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="Jelaskan bentuk kolaborasi yang kamu inginkan..."
+              ></textarea>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary w-full mt-6">
+            Kirim Proposal Kemitraan
+          </button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Partners -->
+    <section class="section bg-white">
+      <div class="container-wide">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+          Mitra & Pendukung
+        </h2>
+        
+        <div class="text-center text-gray-500 py-12">
+          <p>Segera hadir - jadilah yang pertama bergabung.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  // Mock data - akan diganti dengan data dari database
+  const politicians = [
+    {
+      id: 'hanif-dhakiri',
+      name: 'Hanif Dhakiri',
+      position: 'Menteri Ketenagakerjaan',
+      party: 'PKB',
+      bio: 'Menteri Ketenagakerjaan dalam Kabinet Merah Putih.',
+      statements: [],
+    },
+    {
+      id: 'siti-nurbaya',
+      name: 'Siti Nurbaya Bakar',
+      position: 'Menteri Lingkungan Hidup dan Kehutanan',
+      party: 'Non-Partisan',
+      bio: 'Menteri LHK periode 2019-2024, aktif dalam kebijakan lingkungan.',
+      statements: [],
+    },
+  ];
+  
+  return politicians.map(politician => ({
+    params: { slug: politician.id },
+    props: { politician }
+  }));
+}
+
+interface Statement {
+  id: string;
+  date: string;
+  content: string;
+  source: string;
+  sourceUrl: string;
+  sentiment: 'pro' | 'kontra' | 'netral';
+  context: string;
+}
+
+interface Politician {
+  id: string;
+  name: string;
+  position: string;
+  party: string;
+  bio: string;
+  statements: Statement[];
+}
+
+const { politician } = Astro.props as { politician: Politician };
+
+function getSentimentBadge(sentiment: string) {
+  switch (sentiment) {
+    case 'pro':
+      return { emoji: '✅', label: 'Mendukung', bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-200' };
+    case 'kontra':
+      return { emoji: '❌', label: 'Menolak', bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-200' };
+    default:
+      return { emoji: '⏳', label: 'Netral', bg: 'bg-yellow-100', text: 'text-yellow-800', border: 'border-yellow-200' };
+  }
+}
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+// Calculate overall sentiment
+function getOverallSentiment(statements: Statement[]) {
+  if (statements.length === 0) return 'netral';
+  
+  const latest = statements.sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )[0];
+  
+  return latest.sentiment;
+}
+
+const overallSentiment = getSentimentBadge(getOverallSentiment(politician.statements));
+---
+
+<BaseLayout 
+  title={`${politician.name} - Tracker Pejabat`}
+  description={`Sikap dan pernyataan ${politician.name} terkait kebijakan buyback kemasan plastik.`}
+>
+  <Header />
+  
+  <main>
+    <!-- Profile Header -->
+    <section class="section bg-gradient-to-br from-primary-50 to-white">
+      <div class="container-narrow">
+        <a href="/tracker" class="text-primary-600 hover:text-primary-700 text-sm mb-6 inline-flex items-center gap-1">
+          ← Kembali ke Daftar
+        </a>
+        
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <div class="flex flex-col md:flex-row items-start gap-6">
+            <!-- Photo -->
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gray-200 flex items-center justify-center text-4xl shrink-0">
+              👤
+            </div>
+            
+            <!-- Info -->
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h1 class="font-display text-3xl font-bold text-gray-900">
+                  {politician.name}
+                </h1>
+                <span class={`badge ${overallSentiment.bg} ${overallSentiment.text}`}>
+                  {overallSentiment.emoji} {overallSentiment.label}
+                </span>
+              </div>
+              
+              <p class="text-lg text-gray-600 mb-1">{politician.position}</p>
+              <p class="text-gray-500 mb-4">{politician.party}</p>
+              
+              <p class="text-gray-600">
+                {politician.bio}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Statements Timeline -->
+    <section class="section bg-gray-50">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-6">
+          Timeline Pernyataan
+        </h2>
+        
+        {politician.statements.length > 0 ? (
+          <div class="space-y-6">
+            {politician.statements.map(statement => {
+              const sentiment = getSentimentBadge(statement.sentiment);
+              return (
+                <div class={`bg-white rounded-xl p-6 border-l-4 ${sentiment.border}`}>
+                  <div class="flex items-start justify-between gap-4 mb-4">
+                    <span class={`badge ${sentiment.bg} ${sentiment.text}`}>
+                      {sentiment.emoji} {sentiment.label}
+                    </span>
+                    <span class="text-sm text-gray-500">
+                      {formatDate(statement.date)}
+                    </span>
+                  </div>
+                  
+                  <blockquote class="text-lg text-gray-800 mb-4 italic">
+                    "{statement.content}"
+                  </blockquote>
+                  
+                  <p class="text-gray-600 text-sm mb-4">
+                    {statement.context}
+                  </p>
+                  
+                  <a 
+                    href={statement.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm text-primary-600 hover:underline"
+                  >
+                    Sumber: {statement.source} →
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="text-center py-12 bg-white rounded-xl">
+            <div class="text-5xl mb-4">🔍</div>
+            <h3 class="font-semibold text-lg mb-2">Belum Ada Pernyataan Tercatat</h3>
+            <p class="text-gray-600 max-w-md mx-auto mb-6">
+              Kami belum menemukan pernyataan {politician.name} terkait kebijakan buyback kemasan plastik.
+            </p>
+            <a href="/aksi#lapor" class="btn btn-primary">
+              Laporkan Pernyataan
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+    
+    <!-- Related Context -->
+    <section class="section bg-white">
+      <div class="container-narrow">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-6">
+          Relevansi dengan Buyback
+        </h2>
+        
+        <div class="bg-gray-50 rounded-xl p-6">
+          <p class="text-gray-700 leading-relaxed">
+            Sebagai <strong>{politician.position}</strong>, {politician.name} memiliki pengaruh dalam 
+            kebijakan yang berkaitan dengan:
+          </p>
+          
+          <ul class="mt-4 space-y-2">
+            {politician.position.includes('Ketenagakerjaan') && (
+              <>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Penciptaan lapangan kerja di sektor daur ulang</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Pelatihan tenaga kerja untuk ekonomi sirkular</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Formalisasi pekerja informal (pemulung)</span>
+                </li>
+              </>
+            )}
+            {politician.position.includes('Lingkungan') && (
+              <>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Regulasi pengelolaan sampah plastik</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Target pengurangan sampah ke TPA</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-600">•</span>
+                  <span>Implementasi Extended Producer Responsibility (EPR)</span>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Share CTA -->
+    <section class="section bg-primary-600">
+      <div class="container-narrow text-center">
+        <h2 class="font-display text-2xl font-bold text-white mb-4">
+          Bantu Sebarkan Informasi
+        </h2>
+        <p class="text-primary-100 mb-6">
+          Share halaman ini ke media sosial untuk meningkatkan awareness
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-3">
+          <a 
+            href={`https://twitter.com/intent/tweet?text=Sikap+${encodeURIComponent(politician.name)}+terkait+kebijakan+buyback+kemasan+plastik&url=${encodeURIComponent(`https://buyback.my.id/tracker/${politician.id}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn bg-white text-gray-800 hover:bg-gray-100"
+          >
+            Share ke X
+          </a>
+          <a 
+            href={`https://wa.me/?text=${encodeURIComponent(`Lihat sikap ${politician.name} terkait kebijakan buyback kemasan plastik: https://buyback.my.id/tracker/${politician.id}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn bg-green-500 text-white hover:bg-green-600"
+          >
+            Share ke WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
