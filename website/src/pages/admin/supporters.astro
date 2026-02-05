@@ -98,7 +98,7 @@ if (!sessionCookie) {
     }
   </style>
   
-  <script>
+  <script is:inline>
     document.addEventListener('alpine:init', () => {
       Alpine.data('supporterList', () => ({
         loading: true,
@@ -134,7 +134,7 @@ if (!sessionCookie) {
           if (!confirm('Yakin ingin menghapus supporter ini?')) return;
           
           try {
-            const res = await fetch(`/api/admin/supporters?id=${id}`, { method: 'DELETE' });
+            const res = await fetch('/api/admin/supporters?id=' + id, { method: 'DELETE' });
             if (res.ok) {
               await this.fetchData();
             } else {

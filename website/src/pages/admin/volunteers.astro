@@ -155,7 +155,7 @@ if (!sessionCookie) {
     [x-cloak] { display: none !important; }
   </style>
   
-  <script>
+  <script is:inline>
     document.addEventListener('alpine:init', () => {
       Alpine.data('volunteerList', () => ({
         loading: true,
@@ -190,7 +190,7 @@ if (!sessionCookie) {
         },
         
         formatRole(role) {
-          const roles = {
+          var roles = {
             'content_creator': 'Content Creator',
             'social_media': 'Social Media',
             'research': 'Research',
@@ -210,7 +210,7 @@ if (!sessionCookie) {
             const res = await fetch('/api/admin/volunteers', {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id, status })
+              body: JSON.stringify({ id: id, status: status })
             });
             
             if (res.ok) {
@@ -228,7 +228,7 @@ if (!sessionCookie) {
           if (!confirm('Yakin ingin menghapus volunteer ini?')) return;
           
           try {
-            const res = await fetch(`/api/admin/volunteers?id=${id}`, { method: 'DELETE' });
+            const res = await fetch('/api/admin/volunteers?id=' + id, { method: 'DELETE' });
             if (res.ok) {
               await this.fetchData();
             } else {

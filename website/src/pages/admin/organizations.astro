@@ -160,7 +160,7 @@ if (!sessionCookie) {
     [x-cloak] { display: none !important; }
   </style>
   
-  <script>
+  <script is:inline>
     document.addEventListener('alpine:init', () => {
       Alpine.data('organizationList', () => ({
         loading: true,
@@ -195,7 +195,7 @@ if (!sessionCookie) {
         },
         
         formatType(type) {
-          const types = {
+          var types = {
             'ngo': 'NGO/LSM',
             'community': 'Komunitas',
             'company': 'Perusahaan',
@@ -216,7 +216,7 @@ if (!sessionCookie) {
             const res = await fetch('/api/admin/organizations', {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id, status })
+              body: JSON.stringify({ id: id, status: status })
             });
             
             if (res.ok) {
@@ -234,7 +234,7 @@ if (!sessionCookie) {
           if (!confirm('Yakin ingin menghapus organisasi ini?')) return;
           
           try {
-            const res = await fetch(`/api/admin/organizations?id=${id}`, { method: 'DELETE' });
+            const res = await fetch('/api/admin/organizations?id=' + id, { method: 'DELETE' });
             if (res.ok) {
               await this.fetchData();
             } else {

@@ -109,7 +109,7 @@ if (!sessionCookie) {
     </main>
   </div>
   
-  <script>
+  <script is:inline>
     document.addEventListener('alpine:init', () => {
       Alpine.data('adminDashboard', () => ({
         loading: true,

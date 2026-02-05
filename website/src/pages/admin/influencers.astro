@@ -190,7 +190,7 @@ if (!sessionCookie) {
     [x-cloak] { display: none !important; }
   </style>
   
-  <script>
+  <script is:inline>
     document.addEventListener('alpine:init', () => {
       Alpine.data('influencerManager', () => ({
         loading: true,
@@ -296,7 +296,7 @@ if (!sessionCookie) {
           if (!confirm('Yakin ingin menghapus data ini?')) return;
           
           try {
-            const res = await fetch(`/api/admin/influencers?id=${id}`, { method: 'DELETE' });
+            const res = await fetch('/api/admin/influencers?id=' + id, { method: 'DELETE' });
             if (res.ok) {
               await this.fetchData();
             } else {
