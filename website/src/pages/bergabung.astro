@@ -124,8 +124,45 @@ const volunteerRoles = [
         
         <form 
           class="card max-w-lg mx-auto"
-          x-data="{ loading: false, success: false }"
-          @submit.prevent="loading = true; setTimeout(() => { loading = false; success = true; }, 1000)"
+          x-data="{ 
+            loading: false, 
+            success: false, 
+            error: '',
+            async submitForm(e) {
+              this.loading = true;
+              this.error = '';
+              const form = e.target;
+              const formData = new FormData(form);
+              
+              try {
+                const res = await fetch('/api/support', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    city: formData.get('city'),
+                    message: formData.get('reason'),
+                    isPublic: true
+                  })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                  this.success = true;
+                  form.reset();
+                } else {
+                  this.error = data.error || 'Terjadi kesalahan. Coba lagi.';
+                }
+              } catch (err) {
+                this.error = 'Gagal mengirim. Periksa koneksi internet.';
+              } finally {
+                this.loading = false;
+              }
+            }
+          }"
+          @submit.prevent="submitForm($event)"
         >
           <div class="space-y-4">
             <div>
@@ -185,12 +222,14 @@ const volunteerRoles = [
           <button 
             type="submit" 
             class="btn btn-primary w-full mt-6"
-            :disabled="loading"
+            :disabled="loading || success"
           >
             <span x-show="!loading && !success">Daftar Sebagai Supporter</span>
             <span x-show="loading">Memproses...</span>
             <span x-show="success">✅ Selamat bergabung.</span>
           </button>
+          
+          <p x-show="error" x-text="error" class="text-red-600 text-sm mt-3 text-center"></p>
         </form>
       </div>
     </section>
@@ -220,7 +259,50 @@ const volunteerRoles = [
           </div>
         </div>
         
-        <form class="card max-w-lg mx-auto">
+        <form 
+          class="card max-w-lg mx-auto"
+          x-data="{ 
+            loading: false, 
+            success: false, 
+            error: '',
+            async submitForm(e) {
+              this.loading = true;
+              this.error = '';
+              const form = e.target;
+              const formData = new FormData(form);
+              
+              try {
+                const res = await fetch('/api/volunteer', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    whatsapp: formData.get('whatsapp'),
+                    role: formData.get('role'),
+                    portfolioUrl: formData.get('portfolio'),
+                    availability: formData.get('availability'),
+                    motivation: formData.get('motivation')
+                  })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                  this.success = true;
+                  form.reset();
+                } else {
+                  this.error = data.error || 'Terjadi kesalahan. Coba lagi.';
+                }
+              } catch (err) {
+                this.error = 'Gagal mengirim. Periksa koneksi internet.';
+              } finally {
+                this.loading = false;
+              }
+            }
+          }"
+          @submit.prevent="submitForm($event)"
+        >
           <div class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -316,9 +398,17 @@ const volunteerRoles = [
             </div>
           </div>
           
-          <button type="submit" class="btn btn-primary w-full mt-6">
-            Daftar Sebagai Volunteer
+          <button 
+            type="submit" 
+            class="btn btn-primary w-full mt-6"
+            :disabled="loading || success"
+          >
+            <span x-show="!loading && !success">Daftar Sebagai Volunteer</span>
+            <span x-show="loading">Memproses...</span>
+            <span x-show="success">✅ Pendaftaran berhasil.</span>
           </button>
+          
+          <p x-show="error" x-text="error" class="text-red-600 text-sm mt-3 text-center"></p>
         </form>
       </div>
     </section>
@@ -330,7 +420,49 @@ const volunteerRoles = [
           Kemitraan Organisasi
         </h2>
         
-        <form class="card max-w-lg mx-auto">
+        <form 
+          class="card max-w-lg mx-auto"
+          x-data="{ 
+            loading: false, 
+            success: false, 
+            error: '',
+            async submitForm(e) {
+              this.loading = true;
+              this.error = '';
+              const form = e.target;
+              const formData = new FormData(form);
+              
+              try {
+                const res = await fetch('/api/organization', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    orgName: formData.get('org_name'),
+                    orgType: formData.get('org_type'),
+                    picName: formData.get('pic_name'),
+                    picEmail: formData.get('pic_email'),
+                    website: formData.get('website'),
+                    partnershipType: formData.get('partnership_type')
+                  })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                  this.success = true;
+                  form.reset();
+                } else {
+                  this.error = data.error || 'Terjadi kesalahan. Coba lagi.';
+                }
+              } catch (err) {
+                this.error = 'Gagal mengirim. Periksa koneksi internet.';
+              } finally {
+                this.loading = false;
+              }
+            }
+          }"
+          @submit.prevent="submitForm($event)"
+        >
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
@@ -414,9 +546,17 @@ const volunteerRoles = [
             </div>
           </div>
           
-          <button type="submit" class="btn btn-primary w-full mt-6">
-            Kirim Proposal Kemitraan
+          <button 
+            type="submit" 
+            class="btn btn-primary w-full mt-6"
+            :disabled="loading || success"
+          >
+            <span x-show="!loading && !success">Kirim Proposal Kemitraan</span>
+            <span x-show="loading">Memproses...</span>
+            <span x-show="success">✅ Proposal terkirim.</span>
           </button>
+          
+          <p x-show="error" x-text="error" class="text-red-600 text-sm mt-3 text-center"></p>
         </form>
       </div>
     </section>

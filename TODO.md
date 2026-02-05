@@ -100,7 +100,7 @@
   - [x] Form daftar sebagai influencer
   - [x] Form kemitraan organisasi
 
-### Admin Panel (Simple)
+### Admin Panel
 - [ ] Admin login page
 - [ ] Add/edit influencer
 - [ ] Add/edit politician
