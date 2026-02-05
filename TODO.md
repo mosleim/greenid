@@ -157,23 +157,23 @@
 ## Phase 4: Data Population
 
 ### Politicians
-- [ ] Research dan list pejabat terkait
-  - [ ] Menteri LHK
-  - [ ] Anggota Komisi VII DPR
-  - [ ] Gubernur daerah potensial
-  - [ ] Kepala daerah progressive
-- [ ] Collect foto dan social handles
-- [ ] Input ke database
+- [x] Research dan list pejabat terkait
+  - [x] Menteri LHK
+  - [x] Anggota Komisi VII DPR
+  - [x] Gubernur daerah potensial
+  - [x] Kepala daerah progressive
+- [x] Collect foto dan social handles
+- [x] Input ke database
 
 ### Influencers (Initial Seed)
-- [ ] List influencer lingkungan
-- [ ] List influencer potensial lainnya
-- [ ] Input placeholder data
-- [ ] Prepare for outreach
+- [x] List influencer lingkungan
+- [x] List influencer potensial lainnya
+- [x] Input placeholder data
+- [x] Prepare for outreach
 
 ### Statements (Initial)
-- [ ] Research existing statements terkait sampah/plastik
-- [ ] Input dengan sentiment classification
+- [x] Research existing statements terkait sampah/plastik
+- [x] Input dengan sentiment classification
 
 ---
 
