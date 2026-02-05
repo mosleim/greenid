@@ -5,18 +5,30 @@ import Footer from '../components/Footer.astro';
 import { db, influencers as influencersTable } from '../db';
 import { desc } from 'drizzle-orm';
 
+// Influencer display type
+interface InfluencerDisplay {
+  id: string;
+  name: string;
+  handle: string;
+  platform: string;
+  avatarUrl: string;
+  tier: string;
+  impactScore: number;
+  totalImpressions: number;
+}
+
 // Fetch influencers from database
 const influencersData = await db.select().from(influencersTable).orderBy(desc(influencersTable.impactScore));
 
-const influencers = influencersData.map(i => ({
+const influencers: InfluencerDisplay[] = influencersData.map(i => ({
   id: i.id.toString(),
   name: i.name,
   handle: i.handle,
   platform: i.platform,
-  avatarUrl: i.avatarUrl || '/avatars/default.png',
+  avatarUrl: i.photoUrl || '/avatars/default.png',
   tier: i.tier || 'bronze',
   impactScore: i.impactScore || 0,
-  totalImpressions: i.totalImpressions || 0,
+  totalImpressions: i.followersCount || 0, // Use followers count as proxy for impressions
 }));
 
 function formatNumber(num: number): string {

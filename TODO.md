@@ -55,8 +55,9 @@
 - [x] Setup Alpine.js integration
 - [ ] Setup Chart.js
 - [x] Configure Drizzle ORM dengan Turso
+- [x] Connect pages to database
 - [ ] Setup Lucia Auth (untuk admin)
-- [ ] Setup environment variables
+- [x] Setup environment variables (vite loadEnv)
 
 ### Core Pages
 - [x] Homepage (`/`)
