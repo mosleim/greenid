@@ -5,6 +5,21 @@
 ### Deskripsi
 Turso adalah database SQLite edge yang digunakan untuk menyimpan data supporters, influencers, politicians, dan statements.
 
+### Database Schema
+Project ini menggunakan Drizzle ORM dengan tabel-tabel berikut:
+
+| Tabel | Deskripsi |
+|-------|-----------|
+| `supporters` | Pendukung kebijakan buyback |
+| `influencers` | Influencer yang mendukung kampanye |
+| `influencer_posts` | Konten yang dibuat influencer |
+| `politicians` | Pejabat yang dipantau |
+| `statements` | Pernyataan pejabat |
+| `volunteers` | Relawan kampanye |
+| `organizations` | Organisasi mitra |
+| `statement_reports` | Laporan pernyataan dari publik |
+| `stats_cache` | Cache statistik |
+
 ### Konfigurasi yang Dibutuhkan
 - `TURSO_DATABASE_URL` - URL database Turso
 - `TURSO_AUTH_TOKEN` - Token autentikasi
@@ -39,6 +54,12 @@ Turso adalah database SQLite edge yang digunakan untuk menyimpan data supporters
 5. **Copy Database URL**
    - Di dashboard database, lihat bagian "Connect"
    - Copy URL yang format-nya: `libsql://buyback-db-[username].turso.io`
+
+6. **Push Schema ke Database**
+   ```bash
+   cd website
+   pnpm db:push
+   ```
 
 ### Environment Variables
 ```env
@@ -181,6 +202,107 @@ https://pub-abc123.r2.dev/stats.json
 
 ---
 
+## 5. API Endpoints
+
+### Available Endpoints
+
+| Endpoint | Method | Deskripsi |
+|----------|--------|-----------|
+| `/api/support` | POST | Submit dukungan supporter |
+| `/api/stats` | GET | Get statistik platform |
+| `/api/volunteer` | POST | Submit pendaftaran volunteer |
+| `/api/organization` | POST | Submit kemitraan organisasi |
+| `/api/report-statement` | POST | Laporkan pernyataan pejabat |
+
+### POST /api/support
+Submit dukungan supporter.
+
+**Request Body:**
+```json
+{
+  "name": "Nama Lengkap",
+  "email": "email@example.com",
+  "city": "Jakarta",
+  "message": "Pesan dukungan...",
+  "isPublic": true
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": { "id": 1 }
+}
+```
+
+### GET /api/stats
+Get statistik platform.
+
+**Response:**
+```json
+{
+  "supporters": 100,
+  "influencers": 10,
+  "totalFollowersReach": 500000,
+  "estimatedImpressions": 50000,
+  "politicians": 5,
+  "statements": {
+    "total": 3,
+    "pro": 1,
+    "kontra": 0,
+    "netral": 2
+  },
+  "lastUpdated": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### POST /api/volunteer
+Submit pendaftaran volunteer.
+
+**Request Body:**
+```json
+{
+  "name": "Nama",
+  "email": "email@example.com",
+  "whatsapp": "08123456789",
+  "role": "Content Creator",
+  "portfolioUrl": "https://...",
+  "availability": "3-5",
+  "motivation": "..."
+}
+```
+
+### POST /api/organization
+Submit kemitraan organisasi.
+
+**Request Body:**
+```json
+{
+  "orgName": "Nama Organisasi",
+  "orgType": "ngo",
+  "picName": "Nama PIC",
+  "picEmail": "pic@org.com",
+  "website": "https://...",
+  "partnershipType": "..."
+}
+```
+
+### POST /api/report-statement
+Laporkan pernyataan pejabat.
+
+**Request Body:**
+```json
+{
+  "politicianName": "Nama Pejabat",
+  "sourceUrl": "https://...",
+  "quote": "Kutipan pernyataan...",
+  "reporterEmail": "reporter@email.com"
+}
+```
+
+---
+
 ## Quick Start
 
 ### 1. Clone dan Install
@@ -196,13 +318,18 @@ cp .env.example .env
 # Edit .env dengan credentials dari langkah-langkah di atas
 ```
 
-### 3. Run Development Server
+### 3. Push Database Schema
+```bash
+pnpm db:push
+```
+
+### 4. Run Development Server
 ```bash
 pnpm dev
 # Buka http://localhost:4321
 ```
 
-### 4. Build untuk Production
+### 5. Build untuk Production
 ```bash
 pnpm build
 ```

@@ -42,7 +42,7 @@
 - [x] Create database `buyback-db`
 - [x] Generate auth token
 - [x] Create database schema (Drizzle ORM)
-- [ ] Run schema migrations
+- [x] Run schema migrations
 - [ ] Seed initial data (jika ada)
 
 ---
