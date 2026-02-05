@@ -287,12 +287,3 @@ import Footer from '../components/Footer.astro';
   
   <Footer />
 </BaseLayout>
-
-<script>
-  // Alpine.js collapse plugin alternative using CSS
-  document.addEventListener('alpine:init', () => {
-    Alpine.directive('collapse', (el, { expression }, { evaluate }) => {
-      // Simple show/hide without animation
-    });
-  });
-</script>

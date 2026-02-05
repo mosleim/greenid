@@ -54,47 +54,44 @@ TURSO_AUTH_TOKEN=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9...
 
 ---
 
-## 2. Cloudflare Pages
+## 2. Cloudflare Pages (via GitHub Actions)
 
 ### Deskripsi
-Cloudflare Pages digunakan untuk hosting static website dengan edge deployment.
+Cloudflare Pages digunakan untuk hosting static website dengan edge deployment. Deploy dilakukan via GitHub Actions.
 
-### Konfigurasi yang Dibutuhkan
-- Cloudflare account
-- Connected GitHub repository
+### Setup GitHub Secrets
 
-### Cara Setup
+1. Buka repository di GitHub > Settings > Secrets and variables > Actions
+2. Tambahkan secrets berikut:
 
-1. **Buat Account Cloudflare** (jika belum ada)
-   - Kunjungi https://dash.cloudflare.com/sign-up
-   - Verifikasi email
+| Secret Name | Cara Mendapatkan |
+|-------------|------------------|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare Dashboard > My Profile > API Tokens > Create Token > "Edit Cloudflare Workers" template |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare Dashboard > klik domain > Overview > lihat "Account ID" di sidebar kanan |
+| `TURSO_DATABASE_URL` | Turso Dashboard > database > Connect |
+| `TURSO_AUTH_TOKEN` | Turso Dashboard > database > Settings > Generate Token |
+| `PUBLIC_STATS_URL` | URL public R2: `https://cache.buyback.my.id/stats.json` |
 
-2. **Setup Cloudflare Pages**
-   - Di dashboard Cloudflare, klik "Workers & Pages"
-   - Klik "Create application" > "Pages"
-   - Pilih "Connect to Git"
-   - Authorize Cloudflare untuk akses GitHub
-   - Pilih repository `greenid`
+### Membuat Cloudflare API Token
 
-3. **Configure Build Settings**
-   - Framework preset: `Astro`
-   - Build command: `pnpm build`
-   - Build output directory: `dist`
-   - Root directory: `website`
+1. Buka https://dash.cloudflare.com/profile/api-tokens
+2. Klik "Create Token"
+3. Pilih template "Edit Cloudflare Workers"
+4. Di "Account Resources", pilih akun kamu
+5. Di "Zone Resources", pilih "All zones" atau zone spesifik
+6. Klik "Continue to summary" > "Create Token"
+7. Copy token (hanya ditampilkan sekali)
 
-4. **Set Environment Variables**
-   - Di settings project, tambahkan:
-     - `TURSO_DATABASE_URL`
-     - `TURSO_AUTH_TOKEN`
-
-5. **Deploy**
-   - Klik "Save and Deploy"
-   - Tunggu build selesai
+**Trigger Deploy:**
+- Push ke branch `main` dengan perubahan di folder `website/`
+- Atau manual trigger di GitHub Actions > "Deploy to Cloudflare Pages" > "Run workflow"
 
 ### Custom Domain
 1. Di project settings > "Custom domains"
-2. Add domain: `buyback.my.id`
-3. Ikuti instruksi DNS setup
+2. Klik "Set up a custom domain"
+3. Masukkan: `buyback.my.id`
+4. Cloudflare akan otomatis setup DNS records
+5. Tunggu SSL certificate ter-issue (beberapa menit)
 
 ---
 
@@ -104,10 +101,8 @@ Cloudflare Pages digunakan untuk hosting static website dengan edge deployment.
 R2 digunakan untuk caching stats JSON yang di-generate oleh cron worker, menghindari database calls berlebihan.
 
 ### Konfigurasi yang Dibutuhkan
-- `R2_ACCESS_KEY_ID`
-- `R2_SECRET_ACCESS_KEY`
-- `R2_BUCKET_NAME`
-- `R2_ENDPOINT`
+- `R2_BUCKET_NAME` - Nama bucket
+- Public access via custom domain (tidak perlu API credentials untuk read)
 
 ### Cara Setup
 
@@ -120,24 +115,38 @@ R2 digunakan untuk caching stats JSON yang di-generate oleh cron worker, menghin
    - Nama: `buyback-cache`
    - Location: Automatic (atau pilih Asia Pacific)
 
-3. **Generate API Token**
+3. **Enable Public Access**
+   - Di bucket settings, klik "Settings"
+   - Di bagian "Public access", klik "Connect Domain"
+   - Gunakan subdomain: `cache.buyback.my.id`
+   - Atau enable R2.dev subdomain (gratis)
+
+4. **Akses Public**
+   - Dengan custom domain: `https://cache.buyback.my.id/stats.json`
+   - Dengan R2.dev: `https://pub-[hash].r2.dev/stats.json`
+
+5. **API Token untuk Write (Cron Worker)**
    - Di halaman R2, klik "Manage R2 API Tokens"
    - Klik "Create API token"
    - Permission: "Object Read & Write"
    - Bucket scope: Pilih `buyback-cache`
-   - Klik "Create API Token"
-   - Copy Access Key ID dan Secret Access Key
+   - Token hanya diperlukan untuk Worker yang menulis stats
 
-4. **Get Endpoint URL**
-   - Di bucket settings, lihat "S3 API" endpoint
-   - Format: `https://[account-id].r2.cloudflarestorage.com`
-
-### Environment Variables
+### Environment Variables (untuk Cron Worker)
 ```env
-R2_ACCESS_KEY_ID=abc123...
-R2_SECRET_ACCESS_KEY=xyz789...
+# Hanya diperlukan di Cloudflare Worker untuk write
 R2_BUCKET_NAME=buyback-cache
-R2_ENDPOINT=https://123abc.r2.cloudflarestorage.com
+```
+
+Catatan: Di Cloudflare Workers, R2 binding sudah otomatis tersedia via `env.R2_BUCKET` tanpa credentials terpisah.
+
+### Public URL
+```
+# Via custom domain (recommended)
+https://cache.buyback.my.id/stats.json
+
+# Via R2.dev subdomain (free)
+https://pub-abc123.r2.dev/stats.json
 ```
 
 ### Free Tier Limits

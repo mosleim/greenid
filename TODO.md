@@ -26,20 +26,20 @@
 ## Phase 1: Setup Infrastructure
 
 ### Domain & DNS
-- [ ] Beli domain buyback.my.id
-- [ ] Setup DNS di Cloudflare
-- [ ] Verify domain ownership
+- [x] Beli domain buyback.my.id
+- [x] Setup DNS di Cloudflare
+- [x] Verify domain ownership
 
 ### Cloudflare Setup
-- [ ] Create Cloudflare account (jika belum)
-- [ ] Setup Cloudflare Pages project
-- [ ] Setup Cloudflare R2 bucket
+- [x] Create Cloudflare account (jika belum)
+- [x] Setup Cloudflare Pages project
+- [x] Setup Cloudflare R2 bucket
 - [ ] Configure Workers (untuk cron stats)
 
 ### Database Setup
-- [ ] Create Turso account
-- [ ] Create database `buyback-db`
-- [ ] Generate auth token
+- [x] Create Turso account
+- [x] Create database `buyback-db`
+- [x] Generate auth token
 - [ ] Run schema migrations
 - [ ] Seed initial data (jika ada)
 
