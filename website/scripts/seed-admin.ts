@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { createDbConnection, adminUsers } from '../src/db/index';
-import { hash } from '@node-rs/argon2';
+import { hashPassword } from '../src/lib/password';
 
 async function seedAdmin() {
   try {
@@ -12,13 +12,8 @@ async function seedAdmin() {
       TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
     });
 
-    // Hash password
-    const passwordHash = await hash('admin123', {
-      memoryCost: 19456,
-      timeCost: 2,
-      outputLen: 32,
-      parallelism: 1,
-    });
+    // Hash password using edge-compatible PBKDF2
+    const passwordHash = await hashPassword('admin123');
 
     // Check if admin already exists
     const existingAdmin = await db

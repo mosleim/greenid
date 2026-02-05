@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { createDbConnection, adminUsers, adminSessions } from '../../../db';
-import { verify } from '@node-rs/argon2';
+import { verifyPassword } from '../../../lib/password';
 import { eq } from 'drizzle-orm';
 
 export const prerender = false;
@@ -53,12 +53,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
     }
 
     // Verify password
-    const validPassword = await verify(adminUser.passwordHash, data.password, {
-      memoryCost: 19456,
-      timeCost: 2,
-      outputLen: 32,
-      parallelism: 1,
-    });
+    const validPassword = await verifyPassword(adminUser.passwordHash, data.password);
 
     if (!validPassword) {
       return new Response(JSON.stringify({ 
