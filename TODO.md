@@ -43,7 +43,7 @@
 - [x] Generate auth token
 - [x] Create database schema (Drizzle ORM)
 - [x] Run schema migrations
-- [ ] Seed initial data (jika ada)
+- [x] Seed initial data (politicians & influencers)
 
 ---
 

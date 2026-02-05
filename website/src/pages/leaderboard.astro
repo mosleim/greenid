@@ -2,40 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { db, influencers as influencersTable } from '../db';
+import { desc } from 'drizzle-orm';
 
-// Mock data - will be replaced with real data from R2/database
-const influencers = [
-  {
-    id: '1',
-    name: 'Pandawara Group',
-    handle: '@pandawaragroup',
-    platform: 'tiktok',
-    avatarUrl: '/avatars/default.png',
-    tier: 'gold',
-    impactScore: 95000,
-    totalImpressions: 10500000,
-  },
-  {
-    id: '2',
-    name: 'Sungai Watch',
-    handle: '@sungaiwatch',
-    platform: 'instagram',
-    avatarUrl: '/avatars/default.png',
-    tier: 'gold',
-    impactScore: 78000,
-    totalImpressions: 5200000,
-  },
-  {
-    id: '3',
-    name: 'Zero Waste ID',
-    handle: '@zerowasteid',
-    platform: 'instagram',
-    avatarUrl: '/avatars/default.png',
-    tier: 'silver',
-    impactScore: 45000,
-    totalImpressions: 1800000,
-  },
-];
+// Fetch influencers from database
+const influencersData = await db.select().from(influencersTable).orderBy(desc(influencersTable.impactScore));
+
+const influencers = influencersData.map(i => ({
+  id: i.id.toString(),
+  name: i.name,
+  handle: i.handle,
+  platform: i.platform,
+  avatarUrl: i.avatarUrl || '/avatars/default.png',
+  tier: i.tier || 'bronze',
+  impactScore: i.impactScore || 0,
+  totalImpressions: i.totalImpressions || 0,
+}));
 
 function formatNumber(num: number): string {
   if (num >= 1000000) {

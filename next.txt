@@ -1,0 +1,1 @@
+bukankah itu karena turso tidak bisa diakses lewat static file. itu code backend seharusnya.

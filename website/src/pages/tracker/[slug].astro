@@ -2,32 +2,40 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { db, politicians as politiciansTable, statements as statementsTable } from '../../db';
+import { eq, desc } from 'drizzle-orm';
 
 export async function getStaticPaths() {
-  // Mock data - akan diganti dengan data dari database
-  const politicians = [
-    {
-      id: 'hanif-dhakiri',
-      name: 'Hanif Dhakiri',
-      position: 'Menteri Ketenagakerjaan',
-      party: 'PKB',
-      bio: 'Menteri Ketenagakerjaan dalam Kabinet Merah Putih.',
-      statements: [],
-    },
-    {
-      id: 'siti-nurbaya',
-      name: 'Siti Nurbaya Bakar',
-      position: 'Menteri Lingkungan Hidup dan Kehutanan',
-      party: 'Non-Partisan',
-      bio: 'Menteri LHK periode 2019-2024, aktif dalam kebijakan lingkungan.',
-      statements: [],
-    },
-  ];
+  // Get all politicians from database
+  const politiciansData = await db.select().from(politiciansTable);
   
-  return politicians.map(politician => ({
-    params: { slug: politician.id },
-    props: { politician }
+  const paths = await Promise.all(politiciansData.map(async (politician) => {
+    // Get statements for this politician
+    const statementsData = await db.select()
+      .from(statementsTable)
+      .where(eq(statementsTable.politicianId, politician.id))
+      .orderBy(desc(statementsTable.statementDate));
+    
+    return {
+      params: { slug: politician.slug },
+      props: { 
+        politician: {
+          ...politician,
+          statements: statementsData.map(s => ({
+            id: s.id.toString(),
+            date: s.statementDate,
+            content: s.content,
+            source: s.source,
+            sourceUrl: s.sourceUrl,
+            sentiment: s.sentiment as 'pro' | 'kontra' | 'netral',
+            context: s.context || '',
+          })),
+        }
+      }
+    };
   }));
+  
+  return paths;
 }
 
 interface Statement {
@@ -41,11 +49,12 @@ interface Statement {
 }
 
 interface Politician {
-  id: string;
+  id: number;
+  slug: string;
   name: string;
   position: string;
-  party: string;
-  bio: string;
+  party: string | null;
+  bio: string | null;
   statements: Statement[];
 }
 
@@ -248,7 +257,7 @@ const overallSentiment = getSentimentBadge(getOverallSentiment(politician.statem
         
         <div class="flex flex-wrap justify-center gap-3">
           <a 
-            href={`https://twitter.com/intent/tweet?text=Sikap+${encodeURIComponent(politician.name)}+terkait+kebijakan+buyback+kemasan+plastik&url=${encodeURIComponent(`https://buyback.my.id/tracker/${politician.id}`)}`}
+            href={`https://twitter.com/intent/tweet?text=Sikap+${encodeURIComponent(politician.name)}+terkait+kebijakan+buyback+kemasan+plastik&url=${encodeURIComponent(`https://buyback.my.id/tracker/${politician.slug}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="btn bg-white text-gray-800 hover:bg-gray-100"
@@ -256,7 +265,7 @@ const overallSentiment = getSentimentBadge(getOverallSentiment(politician.statem
             Share ke X
           </a>
           <a 
-            href={`https://wa.me/?text=${encodeURIComponent(`Lihat sikap ${politician.name} terkait kebijakan buyback kemasan plastik: https://buyback.my.id/tracker/${politician.id}`)}`}
+            href={`https://wa.me/?text=${encodeURIComponent(`Lihat sikap ${politician.name} terkait kebijakan buyback kemasan plastik: https://buyback.my.id/tracker/${politician.slug}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="btn bg-green-500 text-white hover:bg-green-600"

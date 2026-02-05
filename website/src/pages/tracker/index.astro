@@ -2,32 +2,54 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { db, politicians as politiciansTable, statements as statementsTable } from '../../db';
+import { eq, desc, sql } from 'drizzle-orm';
 
-// Mock data - akan diganti dengan data dari database
-const politicians = [
-  {
-    id: 'hanif-dhakiri',
-    name: 'Hanif Dhakiri',
-    position: 'Menteri Ketenagakerjaan',
-    party: 'PKB',
-    photoUrl: '/politicians/default.png',
-    latestSentiment: 'netral',
-    statementsCount: 0,
-  },
-  {
-    id: 'siti-nurbaya',
-    name: 'Siti Nurbaya Bakar',
-    position: 'Menteri LHK',
-    party: 'Non-Partisan',
-    photoUrl: '/politicians/default.png',
-    latestSentiment: 'netral',
-    statementsCount: 0,
-  },
-];
+// Get politicians from database with statement counts
+const politiciansData = await db.select({
+  id: politiciansTable.id,
+  slug: politiciansTable.slug,
+  name: politiciansTable.name,
+  position: politiciansTable.position,
+  party: politiciansTable.party,
+  photoUrl: politiciansTable.photoUrl,
+}).from(politiciansTable);
 
-const recentStatements = [
-  // Will be populated from database
-];
+// Get statement counts per politician
+const statementCounts = await db.select({
+  politicianId: statementsTable.politicianId,
+  count: sql<number>`count(*)`,
+  latestSentiment: sql<string>`(SELECT sentiment FROM statements WHERE politician_id = ${statementsTable.politicianId} ORDER BY statement_date DESC LIMIT 1)`,
+}).from(statementsTable).groupBy(statementsTable.politicianId);
+
+// Merge data
+const politicians = politiciansData.map(p => {
+  const stats = statementCounts.find(s => s.politicianId === p.id);
+  return {
+    ...p,
+    statementsCount: stats?.count || 0,
+    latestSentiment: stats?.latestSentiment || 'netral',
+  };
+});
+
+// Get recent statements
+const recentStatements = await db.select({
+  id: statementsTable.id,
+  content: statementsTable.content,
+  source: statementsTable.source,
+  sentiment: statementsTable.sentiment,
+  statementDate: statementsTable.statementDate,
+  politicianName: politiciansTable.name,
+  politicianSlug: politiciansTable.slug,
+}).from(statementsTable)
+  .innerJoin(politiciansTable, eq(statementsTable.politicianId, politiciansTable.id))
+  .orderBy(desc(statementsTable.statementDate))
+  .limit(5);
+
+// Calculate summary stats
+const proCount = politicians.filter(p => p.latestSentiment === 'pro').length;
+const kontraCount = politicians.filter(p => p.latestSentiment === 'kontra').length;
+const netralCount = politicians.filter(p => p.latestSentiment === 'netral').length;
 
 function getSentimentBadge(sentiment: string) {
   switch (sentiment) {
@@ -63,15 +85,15 @@ function getSentimentBadge(sentiment: string) {
         <!-- Summary Stats -->
         <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
           <div class="text-center p-4 bg-green-50 rounded-xl">
-            <div class="font-display font-bold text-2xl text-green-600">0</div>
+            <div class="font-display font-bold text-2xl text-green-600">{proCount}</div>
             <div class="text-sm text-green-700">Mendukung</div>
           </div>
           <div class="text-center p-4 bg-yellow-50 rounded-xl">
-            <div class="font-display font-bold text-2xl text-yellow-600">{politicians.length}</div>
+            <div class="font-display font-bold text-2xl text-yellow-600">{netralCount}</div>
             <div class="text-sm text-yellow-700">Belum Menyatakan</div>
           </div>
           <div class="text-center p-4 bg-red-50 rounded-xl">
-            <div class="font-display font-bold text-2xl text-red-600">0</div>
+            <div class="font-display font-bold text-2xl text-red-600">{kontraCount}</div>
             <div class="text-sm text-red-700">Menolak</div>
           </div>
         </div>
@@ -90,7 +112,7 @@ function getSentimentBadge(sentiment: string) {
             const sentiment = getSentimentBadge(politician.latestSentiment);
             
             return (
-              <a href={`/tracker/${politician.id}`} class="card hover:shadow-xl transition-shadow group">
+              <a href={`/tracker/${politician.slug}`} class="card hover:shadow-xl transition-shadow group">
                 <div class="flex items-start gap-4">
                   <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-2xl shrink-0">
                     👤

@@ -4,7 +4,7 @@ const path = require('path');
 const filePath = path.join(__dirname, 'next.txt');
 
 let message = `
-review apa yg telah kamu lakukan. buat dokumentasi, testing, update todolist dan commit jika diperlukan. lalu lakukan apa yg seharusnya dan yg bisa kamu lakukan.
+review apa yg telah kamu lakukan. buat dokumentasi, testing, update todolist dan commit(jangan dipush) jika diperlukan. lalu lakukan apa yg seharusnya dan yg bisa kamu lakukan.
 `;
 
 if (fs.existsSync(filePath)) {

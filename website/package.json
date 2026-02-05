@@ -9,7 +9,8 @@
     "astro": "astro",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "npx tsx src/db/seed.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.0.0",
@@ -24,7 +25,9 @@
   },
   "devDependencies": {
     "@types/alpinejs": "^3.13.0",
+    "dotenv": "^17.2.3",
     "drizzle-kit": "^0.30.0",
+    "tsx": "^4.21.0",
     "wrangler": "^3.100.0"
   },
   "packageManager": "pnpm@9.15.2+sha256.022309bb31359142b65bfa889e0406d2eebd5acfffca47e6944acf29d9d6a66b"
