@@ -132,8 +132,8 @@
 
 ### Visual Assets
 - [ ] Logo buyback.my.id
-- [ ] Favicon
-- [ ] Open Graph images
+- [x] Favicon (SVG placeholder dengan icon recycle)
+- [ ] Open Graph images (SVG template dibuat, perlu convert ke PNG)
 - [ ] Infografis: Volume sampah plastik
 - [ ] Infografis: Mekanisme buyback
 - [ ] Infografis: Dampak ke pemulung

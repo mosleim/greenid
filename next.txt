@@ -1,3 +1,0 @@
-tambahkan worker deployment ke github action
-
-pastikan semua action di trigger manual.

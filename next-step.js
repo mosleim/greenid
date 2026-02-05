@@ -13,6 +13,8 @@ if (fs.existsSync(filePath)) {
   if (fileContent) {
     message = fileContent;
   }
+  
+  fs.writeFileSync(filePath, '');
 }
 
 console.log(message);
