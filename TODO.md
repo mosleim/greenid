@@ -34,6 +34,7 @@
 - [x] Create Cloudflare account (jika belum)
 - [x] Setup Cloudflare Pages project
 - [x] Setup Cloudflare R2 bucket
+- [x] Setup GitHub Actions untuk deploy
 - [ ] Configure Workers (untuk cron stats)
 
 ### Database Setup
@@ -174,10 +175,10 @@
 ## Phase 5: Testing & Launch
 
 ### Testing
-- [ ] Test all pages load correctly
+- [x] Test all pages load correctly
 - [ ] Test forms submission
 - [ ] Test admin panel
-- [ ] Test responsive design (mobile)
+- [x] Test responsive design (mobile)
 - [ ] Test SEO meta tags
 - [ ] Test social sharing preview
 - [ ] Test R2 stats caching
@@ -191,9 +192,9 @@
 - [ ] Setup error tracking (Sentry)
 
 ### Launch
-- [ ] Deploy ke production
-- [ ] Verify SSL working
-- [ ] Test production site
+- [x] Deploy ke production
+- [x] Verify SSL working
+- [x] Test production site
 - [ ] Announce soft launch ke inner circle
 
 ---
