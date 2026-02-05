@@ -1,4 +1,251 @@
 ---
-// Placeholder for admin organizations list
-return Astro.redirect('/admin/dashboard');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+// Auth check
+const sessionCookie = Astro.cookies.get('admin_session');
+if (!sessionCookie) {
+  return Astro.redirect('/admin');
+}
 ---
+
+<BaseLayout title="Lihat Organisasi - Admin">
+  <div class="min-h-screen bg-gray-50" x-data="organizationList()">
+    <!-- Admin Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="container-wide py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <a href="/admin/dashboard" class="text-gray-500 hover:text-gray-700">
+              ← Dashboard
+            </a>
+            <h1 class="font-display text-2xl font-bold text-gray-900">
+              Daftar Organisasi
+            </h1>
+          </div>
+          <div class="text-sm text-gray-500" x-show="!loading">
+            Total: <span class="font-semibold text-gray-900" x-text="items.length"></span> organisasi
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="container-wide py-8">
+      <!-- Loading State -->
+      <div x-show="loading" class="text-center py-12">
+        <div class="text-gray-500">Memuat data...</div>
+      </div>
+      
+      <!-- Empty State -->
+      <div x-show="!loading && items.length === 0" class="text-center py-12">
+        <div class="text-5xl mb-4">🏢</div>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Belum ada organisasi</h2>
+        <p class="text-gray-500">Organisasi yang ingin bermitra akan muncul di sini</p>
+      </div>
+      
+      <!-- Data Table -->
+      <div x-show="!loading && items.length > 0" class="card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50 border-b">
+              <tr>
+                <th class="text-left p-4 font-semibold text-gray-700">Nama</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Tipe</th>
+                <th class="text-left p-4 font-semibold text-gray-700">PIC</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Email PIC</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Website</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Status</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Tanggal</th>
+                <th class="text-right p-4 font-semibold text-gray-700">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y">
+              <template x-for="item in items" :key="item.id">
+                <tr class="hover:bg-gray-50">
+                  <td class="p-4">
+                    <div class="font-medium" x-text="item.name"></div>
+                  </td>
+                  <td class="p-4">
+                    <span class="px-2 py-1 rounded text-xs font-medium"
+                      :class="{
+                        'bg-green-100 text-green-700': item.type === 'ngo',
+                        'bg-blue-100 text-blue-700': item.type === 'community',
+                        'bg-purple-100 text-purple-700': item.type === 'company',
+                        'bg-orange-100 text-orange-700': item.type === 'government',
+                        'bg-indigo-100 text-indigo-700': item.type === 'academic',
+                        'bg-pink-100 text-pink-700': item.type === 'media'
+                      }"
+                      x-text="formatType(item.type)"></span>
+                  </td>
+                  <td class="p-4 text-sm" x-text="item.picName"></td>
+                  <td class="p-4">
+                    <a :href="`mailto:${item.picEmail}`" class="text-primary-600 hover:underline text-sm" x-text="item.picEmail"></a>
+                  </td>
+                  <td class="p-4">
+                    <a x-show="item.website" :href="item.website" target="_blank" class="text-primary-600 hover:underline text-sm">Kunjungi</a>
+                    <span x-show="!item.website" class="text-gray-400 text-sm">-</span>
+                  </td>
+                  <td class="p-4">
+                    <select 
+                      @change="updateStatus(item.id, $event.target.value)"
+                      class="text-sm border rounded px-2 py-1"
+                      :class="{
+                        'bg-yellow-50 border-yellow-300 text-yellow-700': item.status === 'pending',
+                        'bg-green-50 border-green-300 text-green-700': item.status === 'active',
+                        'bg-gray-50 border-gray-300 text-gray-700': item.status === 'inactive'
+                      }">
+                      <option value="pending" :selected="item.status === 'pending'">Pending</option>
+                      <option value="active" :selected="item.status === 'active'">Active</option>
+                      <option value="inactive" :selected="item.status === 'inactive'">Inactive</option>
+                    </select>
+                  </td>
+                  <td class="p-4 text-sm text-gray-500" x-text="formatDate(item.createdAt)"></td>
+                  <td class="p-4 text-right">
+                    <button @click="showDetail(item)" class="text-blue-600 hover:text-blue-800 text-sm mr-3">Detail</button>
+                    <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-800 text-sm">Hapus</button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Detail Modal -->
+    <div x-show="showModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-modal="true">
+      <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="fixed inset-0 bg-black bg-opacity-50" @click="showModal = false"></div>
+        
+        <div class="relative bg-white rounded-xl shadow-xl max-w-lg w-full p-6">
+          <h2 class="font-display text-xl font-bold mb-4">Detail Organisasi</h2>
+          
+          <div x-show="selectedItem" class="space-y-4">
+            <div>
+              <div class="text-sm text-gray-500">Nama Organisasi</div>
+              <div class="font-medium" x-text="selectedItem?.name"></div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-500">Tipe</div>
+              <div x-text="formatType(selectedItem?.type)"></div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-500">PIC</div>
+              <div x-text="selectedItem?.picName"></div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-500">Email PIC</div>
+              <div x-text="selectedItem?.picEmail"></div>
+            </div>
+            <div x-show="selectedItem?.website">
+              <div class="text-sm text-gray-500">Website</div>
+              <a :href="selectedItem?.website" target="_blank" class="text-primary-600 hover:underline" x-text="selectedItem?.website"></a>
+            </div>
+            <div x-show="selectedItem?.partnershipType">
+              <div class="text-sm text-gray-500">Jenis Kemitraan yang Diinginkan</div>
+              <div class="text-gray-700 bg-gray-50 p-3 rounded" x-text="selectedItem?.partnershipType"></div>
+            </div>
+          </div>
+          
+          <div class="flex justify-end mt-6">
+            <button @click="showModal = false" class="btn btn-secondary">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+  
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('organizationList', () => ({
+        loading: true,
+        items: [],
+        showModal: false,
+        selectedItem: null,
+        
+        async init() {
+          await this.fetchData();
+        },
+        
+        async fetchData() {
+          try {
+            const res = await fetch('/api/admin/organizations');
+            if (res.ok) {
+              this.items = await res.json();
+            }
+          } catch (error) {
+            console.error('Failed to fetch:', error);
+          } finally {
+            this.loading = false;
+          }
+        },
+        
+        formatDate(dateStr) {
+          if (!dateStr) return '-';
+          return new Date(dateStr).toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          });
+        },
+        
+        formatType(type) {
+          const types = {
+            'ngo': 'NGO/LSM',
+            'community': 'Komunitas',
+            'company': 'Perusahaan',
+            'government': 'Pemerintah',
+            'academic': 'Akademisi',
+            'media': 'Media'
+          };
+          return types[type] || type;
+        },
+        
+        showDetail(item) {
+          this.selectedItem = item;
+          this.showModal = true;
+        },
+        
+        async updateStatus(id, status) {
+          try {
+            const res = await fetch('/api/admin/organizations', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id, status })
+            });
+            
+            if (res.ok) {
+              await this.fetchData();
+            } else {
+              alert('Gagal mengupdate status');
+            }
+          } catch (error) {
+            console.error('Update error:', error);
+            alert('Terjadi kesalahan');
+          }
+        },
+        
+        async deleteItem(id) {
+          if (!confirm('Yakin ingin menghapus organisasi ini?')) return;
+          
+          try {
+            const res = await fetch(`/api/admin/organizations?id=${id}`, { method: 'DELETE' });
+            if (res.ok) {
+              await this.fetchData();
+            } else {
+              alert('Gagal menghapus data');
+            }
+          } catch (error) {
+            console.error('Delete error:', error);
+            alert('Terjadi kesalahan');
+          }
+        }
+      }));
+    });
+  </script>
+</BaseLayout>

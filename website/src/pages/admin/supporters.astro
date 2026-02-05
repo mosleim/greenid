@@ -1,4 +1,151 @@
 ---
-// Placeholder for admin supporters list
-return Astro.redirect('/admin/dashboard');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+// Auth check
+const sessionCookie = Astro.cookies.get('admin_session');
+if (!sessionCookie) {
+  return Astro.redirect('/admin');
+}
 ---
+
+<BaseLayout title="Lihat Supporters - Admin">
+  <div class="min-h-screen bg-gray-50" x-data="supporterList()">
+    <!-- Admin Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="container-wide py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <a href="/admin/dashboard" class="text-gray-500 hover:text-gray-700">
+              ← Dashboard
+            </a>
+            <h1 class="font-display text-2xl font-bold text-gray-900">
+              Daftar Supporters
+            </h1>
+          </div>
+          <div class="text-sm text-gray-500" x-show="!loading">
+            Total: <span class="font-semibold text-gray-900" x-text="items.length"></span> supporters
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="container-wide py-8">
+      <!-- Loading State -->
+      <div x-show="loading" class="text-center py-12">
+        <div class="text-gray-500">Memuat data...</div>
+      </div>
+      
+      <!-- Empty State -->
+      <div x-show="!loading && items.length === 0" class="text-center py-12">
+        <div class="text-5xl mb-4">👥</div>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2">Belum ada supporters</h2>
+        <p class="text-gray-500">Supporters yang mendukung kampanye akan muncul di sini</p>
+      </div>
+      
+      <!-- Data Table -->
+      <div x-show="!loading && items.length > 0" class="card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50 border-b">
+              <tr>
+                <th class="text-left p-4 font-semibold text-gray-700">Nama</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Email</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Kota</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Pesan</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Publik</th>
+                <th class="text-left p-4 font-semibold text-gray-700">Tanggal</th>
+                <th class="text-right p-4 font-semibold text-gray-700">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y">
+              <template x-for="item in items" :key="item.id">
+                <tr class="hover:bg-gray-50">
+                  <td class="p-4">
+                    <div class="font-medium" x-text="item.name"></div>
+                  </td>
+                  <td class="p-4">
+                    <a :href="`mailto:${item.email}`" class="text-primary-600 hover:underline text-sm" x-text="item.email"></a>
+                  </td>
+                  <td class="p-4 text-sm" x-text="item.city || '-'"></td>
+                  <td class="p-4 max-w-xs">
+                    <div class="text-sm text-gray-600 line-clamp-2" x-text="item.message || '-'"></div>
+                  </td>
+                  <td class="p-4">
+                    <span x-show="item.isPublic" class="text-green-600 text-sm">Ya</span>
+                    <span x-show="!item.isPublic" class="text-gray-400 text-sm">Tidak</span>
+                  </td>
+                  <td class="p-4 text-sm text-gray-500" x-text="formatDate(item.createdAt)"></td>
+                  <td class="p-4 text-right">
+                    <button @click="deleteItem(item.id)" class="text-red-600 hover:text-red-800 text-sm">Hapus</button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <style>
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('supporterList', () => ({
+        loading: true,
+        items: [],
+        
+        async init() {
+          await this.fetchData();
+        },
+        
+        async fetchData() {
+          try {
+            const res = await fetch('/api/admin/supporters');
+            if (res.ok) {
+              this.items = await res.json();
+            }
+          } catch (error) {
+            console.error('Failed to fetch:', error);
+          } finally {
+            this.loading = false;
+          }
+        },
+        
+        formatDate(dateStr) {
+          if (!dateStr) return '-';
+          return new Date(dateStr).toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          });
+        },
+        
+        async deleteItem(id) {
+          if (!confirm('Yakin ingin menghapus supporter ini?')) return;
+          
+          try {
+            const res = await fetch(`/api/admin/supporters?id=${id}`, { method: 'DELETE' });
+            if (res.ok) {
+              await this.fetchData();
+            } else {
+              alert('Gagal menghapus data');
+            }
+          } catch (error) {
+            console.error('Delete error:', error);
+            alert('Terjadi kesalahan');
+          }
+        }
+      }));
+    });
+  </script>
+</BaseLayout>
