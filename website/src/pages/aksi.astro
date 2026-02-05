@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+const pageDescription = 'Ambil aksi nyata untuk dukung kebijakan buyback kemasan. Download kit kampanye, template pesan ke DPR, dan sebarkan informasi di media sosial.';
+
 const shareTemplates = {
   twitter: {
     text: '🌿 Indonesia butuh kebijakan buyback kemasan plastik. Ini bukan cuma soal lingkungan, tapi juga ekonomi rakyat. Yuk dukung gerakan ini bersama.',
@@ -92,7 +94,7 @@ const contactOptions = [
 
 <BaseLayout 
   title="Aksi Nyata" 
-  description="Cara mudah untuk turut mendukung kebijakan buyback kemasan plastik di Indonesia."
+  description={pageDescription}
 >
   <Header />
   
@@ -170,9 +172,27 @@ const contactOptions = [
     <!-- Share Section -->
     <section id="share" class="section bg-gray-50">
       <div class="container-narrow">
-        <h2 class="font-display text-2xl font-bold text-gray-900 mb-8 text-center">
+        <h2 class="font-display text-2xl font-bold text-gray-900 mb-4 text-center">
           Template Share
         </h2>
+        <p class="text-center text-gray-600 mb-8">
+          Download kit lengkap atau gunakan template di bawah
+        </p>
+        
+        <!-- Social Media Kit Download -->
+        <div class="card bg-primary-50 border-2 border-primary-200 mb-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-primary-800">Social Media Kit Lengkap</h3>
+              <p class="text-primary-700 text-sm">
+                10 caption templates, hashtag set, talking points, dan panduan visual
+              </p>
+            </div>
+            <a href="/downloads/social-media-kit.md" download class="btn btn-primary whitespace-nowrap">
+              📥 Download Kit
+            </a>
+          </div>
+        </div>
         
         <div class="space-y-6">
           <!-- Twitter -->

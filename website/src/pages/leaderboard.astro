@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import { db, influencers as influencersTable } from '../db';
 import { desc } from 'drizzle-orm';
 
+const pageDescription = 'Lihat peringkat influencer yang mendukung gerakan buyback kemasan plastik. Dari content creator lingkungan hingga public figure, semua berkontribusi untuk Indonesia bersih.';
+
 // Influencer display type
 interface InfluencerDisplay {
   id: string;
@@ -72,7 +74,7 @@ function getPlatformIcon(platform: string) {
 
 <BaseLayout 
   title="Leaderboard" 
-  description="Lihat influencer dan pendukung yang paling berpengaruh dalam gerakan buyback kemasan plastik Indonesia."
+  description={pageDescription}
 >
   <Header />
   

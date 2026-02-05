@@ -5,6 +5,8 @@ import Footer from '../../components/Footer.astro';
 import { db, politicians as politiciansTable, statements as statementsTable } from '../../db';
 import { eq, desc, sql } from 'drizzle-orm';
 
+const pageDescription = 'Pantau posisi dan pernyataan pejabat publik terkait kebijakan pengelolaan sampah plastik dan buyback kemasan di Indonesia.';
+
 // Get politicians from database with statement counts
 const politiciansData = db ? await db.select({
   id: politiciansTable.id,
@@ -65,7 +67,7 @@ function getSentimentBadge(sentiment: string) {
 
 <BaseLayout 
   title="Tracker Pejabat" 
-  description="Pantau sikap dan pernyataan pejabat publik terkait kebijakan buyback kemasan plastik."
+  description={pageDescription}
 >
   <Header />
   

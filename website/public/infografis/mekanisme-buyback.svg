@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eff6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dbeafe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad2)"/>
+  
+  <!-- Title -->
+  <text x="400" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#111827">
+    Bagaimana Sistem Buyback Bekerja?
+  </text>
+  <text x="400" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="15" text-anchor="middle" fill="#6b7280">
+    Sistem sederhana yang menguntungkan semua pihak
+  </text>
+  
+  <!-- Step 1: Beli Produk -->
+  <rect x="40" y="110" width="160" height="180" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="120" cy="155" r="30" fill="#eff6ff"/>
+  <text x="120" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle">🛒</text>
+  <text x="120" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#3b82f6">LANGKAH 1</text>
+  <text x="120" y="235" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Beli Produk</text>
+  <text x="120" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">Harga termasuk</text>
+  <text x="120" y="278" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">deposit kecil (3-5%)</text>
+  
+  <!-- Arrow 1 -->
+  <polygon points="220,200 250,185 250,195 280,195 280,205 250,205 250,215" fill="url(#arrowGrad)"/>
+  
+  <!-- Step 2: Gunakan -->
+  <rect x="280" y="110" width="160" height="180" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="360" cy="155" r="30" fill="#fef3c7"/>
+  <text x="360" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle">📦</text>
+  <text x="360" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#f59e0b">LANGKAH 2</text>
+  <text x="360" y="235" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Gunakan</text>
+  <text x="360" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">Konsumsi produk</text>
+  <text x="360" y="278" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">seperti biasa</text>
+  
+  <!-- Arrow 2 -->
+  <polygon points="460,200 490,185 490,195 520,195 520,205 490,205 490,215" fill="url(#arrowGrad)"/>
+  
+  <!-- Step 3: Kembalikan -->
+  <rect x="520" y="110" width="160" height="180" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="600" cy="155" r="30" fill="#dcfce7"/>
+  <text x="600" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle">♻️</text>
+  <text x="600" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#059669">LANGKAH 3</text>
+  <text x="600" y="235" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Kembalikan</text>
+  <text x="600" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">Bawa ke toko/</text>
+  <text x="600" y="278" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">collection point</text>
+  
+  <!-- Arrow 3 to money -->
+  <path d="M680,200 L720,200 L720,350 L400,350" stroke="url(#arrowGrad)" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+  <polygon points="680,200 710,185 710,215" fill="url(#arrowGrad)"/>
+  
+  <!-- Result: Dapat Uang -->
+  <rect x="280" y="330" width="240" height="100" rx="12" fill="#059669"/>
+  <text x="400" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle">💰</text>
+  <text x="400" y="405" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="white">Dapat Uang Kembali!</text>
+  
+  <!-- Benefits section -->
+  <text x="400" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#374151">
+    Siapa yang Diuntungkan?
+  </text>
+  
+  <rect x="40" y="490" width="170" height="80" rx="8" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="125" y="525" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle">👨‍👩‍👧‍👦</text>
+  <text x="125" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Konsumen</text>
+  
+  <rect x="230" y="490" width="170" height="80" rx="8" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="315" y="525" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle">🧹</text>
+  <text x="315" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Pemulung</text>
+  
+  <rect x="420" y="490" width="170" height="80" rx="8" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="505" y="525" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle">🏭</text>
+  <text x="505" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Industri</text>
+  
+  <rect x="610" y="490" width="150" height="80" rx="8" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="685" y="525" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle">🌊</text>
+  <text x="685" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Lingkungan</text>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad3)"/>
+  
+  <!-- Title -->
+  <text x="400" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#111827">
+    Dampak Positif untuk Pemulung
+  </text>
+  <text x="400" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="15" text-anchor="middle" fill="#78716c">
+    Kebijakan buyback justru menguntungkan para pemulung
+  </text>
+  
+  <!-- Current situation -->
+  <rect x="40" y="100" width="350" height="220" rx="12" fill="white" stroke="#fbbf24" stroke-width="2"/>
+  <text x="215" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#d97706">
+    😔 KONDISI SAAT INI
+  </text>
+  
+  <text x="60" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#78716c">• Harga sampah tidak stabil</text>
+  <text x="60" y="195" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#78716c">• Pendapatan tidak menentu</text>
+  <text x="60" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#78716c">• Bargaining power lemah</text>
+  <text x="60" y="245" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#78716c">• Pekerjaan dianggap rendah</text>
+  <text x="60" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#78716c">• Tidak ada jaminan sosial</text>
+  
+  <rect x="100" y="285" width="200" height="25" rx="4" fill="#fef3c7"/>
+  <text x="200" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#d97706">
+    Rp 5.000 - 15.000/hari
+  </text>
+  
+  <!-- Arrow -->
+  <polygon points="410,210 450,180 450,200 500,200 500,220 450,220 450,240" fill="#059669"/>
+  
+  <!-- After buyback -->
+  <rect x="410" y="100" width="350" height="220" rx="12" fill="white" stroke="#059669" stroke-width="2"/>
+  <text x="585" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#059669">
+    😊 DENGAN BUYBACK
+  </text>
+  
+  <text x="430" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">✓ Harga sampah naik 2-3x lipat</text>
+  <text x="430" y="195" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">✓ Floor price dari produsen</text>
+  <text x="430" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">✓ Bargaining power lebih kuat</text>
+  <text x="430" y="245" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">✓ Pekerjaan terformalisasi</text>
+  <text x="430" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">✓ Potensi akses jaminan sosial</text>
+  
+  <rect x="470" y="285" width="200" height="25" rx="4" fill="#dcfce7"/>
+  <text x="570" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#059669">
+    Rp 30.000 - 75.000/hari
+  </text>
+  
+  <!-- Key stats -->
+  <text x="400" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#374151">
+    Fakta Penting
+  </text>
+  
+  <rect x="40" y="380" width="230" height="100" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="155" y="415" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Jumlah Pemulung di Indonesia</text>
+  <text x="155" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#f59e0b">3,7 Juta</text>
+  <text x="155" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">orang (perkiraan)</text>
+  
+  <rect x="285" y="380" width="230" height="100" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="400" y="415" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Kenaikan Pendapatan</text>
+  <text x="400" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#059669">3-5x</text>
+  <text x="400" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">dari sebelumnya</text>
+  
+  <rect x="530" y="380" width="230" height="100" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="645" y="415" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Potensi Bulanan</text>
+  <text x="645" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#3b82f6">Rp 2 Juta+</text>
+  <text x="645" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">per pemulung</text>
+  
+  <!-- Quote -->
+  <rect x="40" y="500" width="720" height="70" rx="12" fill="#059669"/>
+  <text x="400" y="535" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-style="italic" text-anchor="middle" fill="white">
+    "Pemulung adalah pahlawan lingkungan yang selama ini tidak dihargai.
+  </text>
+  <text x="400" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-style="italic" text-anchor="middle" fill="white">
+    Buyback memberi mereka penghargaan yang layak."
+  </text>
+</svg>

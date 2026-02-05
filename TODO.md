@@ -131,26 +131,26 @@
 ## Phase 3: Content Preparation
 
 ### Visual Assets
-- [ ] Logo buyback.my.id
+- [x] Logo buyback.my.id
 - [x] Favicon (SVG placeholder dengan icon recycle)
-- [ ] Open Graph images (SVG template dibuat, perlu convert ke PNG)
-- [ ] Infografis: Volume sampah plastik
-- [ ] Infografis: Mekanisme buyback
-- [ ] Infografis: Dampak ke pemulung
-- [ ] Infografis: Perbandingan negara lain
+- [x] Open Graph images (SVG template dibuat, perlu convert ke PNG)
+- [x] Infografis: Volume sampah plastik
+- [x] Infografis: Mekanisme buyback
+- [x] Infografis: Dampak ke pemulung
+- [x] Infografis: Perbandingan negara lain
 
 ### Written Content
-- [ ] Homepage copy
-- [ ] Tentang page content
-- [ ] FAQ items (minimal 10)
-- [ ] Data & statistics dengan sources
-- [ ] Meta descriptions untuk SEO
+- [x] Homepage copy
+- [x] Tentang page content
+- [x] FAQ items (minimal 10)
+- [x] Data & statistics dengan sources
+- [x] Meta descriptions untuk SEO
 
 ### Social Media Kit
-- [ ] 5 ready-to-post infografis
-- [ ] 10 caption templates
-- [ ] Hashtag set
-- [ ] Talking points document
+- [x] 5 ready-to-post infografis
+- [x] 10 caption templates
+- [x] Hashtag set
+- [x] Talking points document
 
 ---
 

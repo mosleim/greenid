@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0fdf4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dcfce7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad1)"/>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#111827">
+    Volume Sampah Plastik Indonesia
+  </text>
+  <text x="400" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="16" text-anchor="middle" fill="#6b7280">
+    Indonesia adalah penyumbang sampah plastik ke laut terbesar kedua di dunia
+  </text>
+  
+  <!-- Key stat -->
+  <rect x="50" y="110" width="700" height="100" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="400" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" text-anchor="middle" fill="#059669">
+    6,8 Juta Ton/Tahun
+  </text>
+  <text x="400" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="18" text-anchor="middle" fill="#6b7280">
+    Total produksi sampah plastik Indonesia per tahun
+  </text>
+  
+  <!-- Bar Chart - Country Comparison -->
+  <text x="50" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#374151">
+    Perbandingan dengan Negara Lain (Juta Ton/Tahun)
+  </text>
+  
+  <!-- China -->
+  <text x="50" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">Tiongkok</text>
+  <rect x="150" y="275" width="550" height="24" rx="4" fill="#ef4444"/>
+  <text x="710" y="293" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#ef4444">8.8</text>
+  
+  <!-- Indonesia -->
+  <text x="50" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#059669">Indonesia</text>
+  <rect x="150" y="315" width="425" height="24" rx="4" fill="url(#barGrad)"/>
+  <text x="585" y="333" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#059669">6.8</text>
+  
+  <!-- Philippines -->
+  <text x="50" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">Filipina</text>
+  <rect x="150" y="355" width="220" height="24" rx="4" fill="#f59e0b"/>
+  <text x="380" y="373" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#f59e0b">3.5</text>
+  
+  <!-- Vietnam -->
+  <text x="50" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#374151">Vietnam</text>
+  <rect x="150" y="395" width="185" height="24" rx="4" fill="#3b82f6"/>
+  <text x="345" y="413" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#3b82f6">2.9</text>
+  
+  <!-- Impact boxes -->
+  <rect x="50" y="450" width="220" height="120" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="160" y="485" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Sampah ke Laut</text>
+  <text x="160" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#ef4444">1.29 Juta</text>
+  <text x="160" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">ton per tahun</text>
+  
+  <rect x="290" y="450" width="220" height="120" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="400" y="485" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Tingkat Daur Ulang</text>
+  <text x="400" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#f59e0b">11%</text>
+  <text x="400" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">dari total sampah</text>
+  
+  <rect x="530" y="450" width="220" height="120" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="640" y="485" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Potensi Nilai Ekonomi</text>
+  <text x="640" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="700" text-anchor="middle" fill="#059669">Rp 15T</text>
+  <text x="640" y="550" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">per tahun terbuang</text>
+  
+  <!-- Source -->
+  <text x="750" y="590" font-family="system-ui, -apple-system, sans-serif" font-size="11" text-anchor="end" fill="#9ca3af">
+    Sumber: World Bank, KLHK 2023
+  </text>
+</svg>

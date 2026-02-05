@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ede9fe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ddd6fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad4)"/>
+  
+  <!-- Title -->
+  <text x="400" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#111827">
+    Bukti Keberhasilan di Negara Lain
+  </text>
+  <text x="400" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="15" text-anchor="middle" fill="#6b7280">
+    Sistem Deposit-Return sudah terbukti efektif di banyak negara
+  </text>
+  
+  <!-- Germany -->
+  <rect x="40" y="100" width="350" height="130" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="100" cy="165" r="40" fill="#111827"/>
+  <text x="100" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="28" text-anchor="middle" fill="white">🇩🇪</text>
+  <text x="100" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="white">Jerman</text>
+  <text x="260" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#059669">97%</text>
+  <text x="260" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Tingkat Pengembalian</text>
+  <text x="260" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#9ca3af">Sejak 2003 (Pfand System)</text>
+  <text x="260" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#059669">€0.25 per botol</text>
+  
+  <!-- Norway -->
+  <rect x="410" y="100" width="350" height="130" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="470" cy="165" r="40" fill="#ef4444"/>
+  <text x="470" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="28" text-anchor="middle" fill="white">🇳🇴</text>
+  <text x="470" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="white">Norwegia</text>
+  <text x="630" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#059669">92%</text>
+  <text x="630" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Tingkat Pengembalian</text>
+  <text x="630" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#9ca3af">Sejak 1999</text>
+  <text x="630" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#059669">NOK 2-3 per kemasan</text>
+  
+  <!-- South Korea -->
+  <rect x="40" y="250" width="350" height="130" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="100" cy="315" r="40" fill="#3b82f6"/>
+  <text x="100" y="305" font-family="system-ui, -apple-system, sans-serif" font-size="28" text-anchor="middle" fill="white">🇰🇷</text>
+  <text x="100" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="white">Korea</text>
+  <text x="260" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#059669">70%+</text>
+  <text x="260" y="315" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Tingkat Pengembalian</text>
+  <text x="260" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#9ca3af">EPR System aktif</text>
+  <text x="260" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#059669">₩100-300 per botol</text>
+  
+  <!-- EU -->
+  <rect x="410" y="250" width="350" height="130" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="470" cy="315" r="40" fill="#1d4ed8"/>
+  <text x="470" y="305" font-family="system-ui, -apple-system, sans-serif" font-size="28" text-anchor="middle" fill="white">🇪🇺</text>
+  <text x="470" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="white">Uni Eropa</text>
+  <text x="630" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#f59e0b">90%</text>
+  <text x="630" y="315" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Target 2029</text>
+  <text x="630" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#9ca3af">SUP Directive</text>
+  <text x="630" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="12" text-anchor="middle" fill="#f59e0b">Wajib semua negara anggota</text>
+  
+  <!-- Indonesia comparison -->
+  <rect x="40" y="400" width="720" height="80" rx="12" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <text x="100" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle">🇮🇩</text>
+  <text x="400" y="435" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#ef4444">
+    Indonesia: Belum ada kebijakan buyback nasional
+  </text>
+  <text x="400" y="465" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#b91c1c">
+    Tingkat daur ulang plastik masih di bawah 11%
+  </text>
+  
+  <!-- CTA -->
+  <rect x="200" y="500" width="400" height="70" rx="12" fill="#059669"/>
+  <text x="400" y="535" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="white">
+    Saatnya Indonesia Berubah
+  </text>
+  <text x="400" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#dcfce7">
+    Dukung kebijakan buyback di buyback.my.id
+  </text>
+</svg>

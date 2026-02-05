@@ -2,34 +2,52 @@
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#ecfdf5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f0fdf4;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#dcfce7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
     </linearGradient>
   </defs>
   
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg)"/>
   
-  <!-- Icon -->
-  <circle cx="600" cy="200" r="80" fill="#16a34a"/>
-  <text x="600" y="225" font-size="80" text-anchor="middle" fill="white">♻</text>
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="150" fill="#059669" opacity="0.05"/>
+  <circle cx="1100" cy="530" r="200" fill="#10b981" opacity="0.05"/>
+  <circle cx="1050" cy="80" r="80" fill="#059669" opacity="0.08"/>
+  
+  <!-- Logo Icon -->
+  <circle cx="600" cy="180" r="70" fill="url(#iconGrad)"/>
+  <g fill="white" transform="translate(600, 180) scale(0.5)">
+    <path d="M0,-80 L25,-35 L10,-35 L10,-10 L-10,-10 L-10,-35 L-25,-35 Z" transform="rotate(0)"/>
+    <path d="M0,-80 L25,-35 L10,-35 L10,-10 L-10,-10 L-10,-35 L-25,-35 Z" transform="rotate(120)"/>
+    <path d="M0,-80 L25,-35 L10,-35 L10,-10 L-10,-10 L-10,-35 L-25,-35 Z" transform="rotate(240)"/>
+  </g>
   
   <!-- Title -->
-  <text x="600" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="#111827">
+  <text x="600" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="700" text-anchor="middle" fill="#111827">
     Buyback Indonesia
   </text>
   
   <!-- Tagline -->
-  <text x="600" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="32" text-anchor="middle" fill="#4b5563">
+  <text x="600" y="390" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="500" text-anchor="middle" fill="#059669">
     Setiap Kemasan Punya Nilai
   </text>
   
-  <!-- Subtitle -->
-  <text x="600" y="480" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="#6b7280">
-    Dukung kebijakan buyback kemasan plastik di Indonesia
+  <!-- Description -->
+  <text x="600" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="#6b7280">
+    Dukung kebijakan buyback kemasan plastik untuk Indonesia
+  </text>
+  <text x="600" y="485" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="#6b7280">
+    yang lebih bersih dan berkelanjutan
   </text>
   
-  <!-- Website URL -->
-  <text x="600" y="580" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="#16a34a">
+  <!-- Website URL with pill background -->
+  <rect x="500" y="540" width="200" height="45" rx="22" fill="#059669"/>
+  <text x="600" y="570" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="600" text-anchor="middle" fill="white">
     buyback.my.id
   </text>
 </svg>

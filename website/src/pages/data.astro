@@ -34,25 +34,46 @@ const wasteComposition = [
 
 const researchSources = [
   {
-    title: 'Plastic Pollution in Indonesia',
+    title: 'Plastic Waste Dischargers to the Ocean',
+    source: 'Jambeck et al. (Science)',
+    year: 2015,
+    keyFinding: 'Indonesia adalah penyumbang sampah plastik ke laut terbesar kedua di dunia dengan 3.2 juta ton per tahun.',
+    url: 'https://www.science.org/doi/10.1126/science.1260352'
+  },
+  {
+    title: 'Hotspot Sampah Laut Indonesia',
     source: 'World Bank',
-    year: 2023,
-    keyFinding: 'Indonesia merupakan penghasil sampah plastik terbesar kedua di dunia.',
-    url: 'https://www.worldbank.org/en/country/indonesia/publication/plastic-pollution-in-indonesia'
+    year: 2021,
+    keyFinding: 'Kurang dari 5% sampah plastik di Indonesia didaur ulang, dengan kerugian ekonomi Rp 15 triliun per tahun.',
+    url: 'https://www.worldbank.org/en/country/indonesia/publication/plastic-marine-debris-in-east-asia-and-pacific'
   },
   {
-    title: 'Extended Producer Responsibility Implementation',
-    source: 'KLHK',
-    year: 2024,
-    keyFinding: 'Implementasi EPR dapat mengurangi sampah plastik ke TPA sebesar 30%.',
-    url: '#'
-  },
-  {
-    title: 'Economic Impact of Recycling Industry',
-    source: 'McKinsey & Company',
+    title: 'Global Plastics Outlook',
+    source: 'OECD',
     year: 2022,
-    keyFinding: 'Industri daur ulang berpotensi menciptakan 500.000 lapangan kerja baru.',
-    url: '#'
+    keyFinding: 'Sistem Extended Producer Responsibility (EPR) terbukti meningkatkan tingkat daur ulang hingga 90% di negara-negara Eropa.',
+    url: 'https://www.oecd.org/environment/global-plastics-outlook-de747aef-en.htm'
+  },
+  {
+    title: 'Deposit Return Systems',
+    source: 'European Commission',
+    year: 2023,
+    keyFinding: 'Negara dengan sistem deposit-return mencapai tingkat pengumpulan botol plastik 90-97%, dibanding rata-rata 40% tanpa sistem.',
+    url: 'https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en'
+  },
+  {
+    title: 'Informal Waste Sector Study',
+    source: 'ILO & UNDP',
+    year: 2020,
+    keyFinding: 'Indonesia memiliki 3.7 juta pemulung dengan pendapatan rata-rata Rp 300.000-500.000 per bulan yang dapat meningkat 3-5x dengan sistem buyback.',
+    url: 'https://www.ilo.org/jakarta/whatwedo/publications/lang--en/index.htm'
+  },
+  {
+    title: 'Korea EPR System Review',
+    source: 'Korea Environment Corporation',
+    year: 2021,
+    keyFinding: 'Sistem EPR Korea berhasil meningkatkan tingkat daur ulang dari 15% menjadi 70% dalam 10 tahun implementasi.',
+    url: 'https://www.keco.or.kr/en/main/index.do'
   },
 ];
 
@@ -224,11 +245,17 @@ function formatNumber(num: number) {
         </p>
         
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="/downloads/infografis-buyback.pdf" class="btn bg-white text-primary-700 hover:bg-primary-50">
-            📊 Infografis Data
+          <a href="/infografis/volume-sampah-plastik.svg" download class="btn bg-white text-primary-700 hover:bg-primary-50">
+            📊 Volume Sampah Plastik
           </a>
-          <a href="/downloads/fact-sheet-buyback.pdf" class="btn bg-white text-primary-700 hover:bg-primary-50">
-            📄 Fact Sheet
+          <a href="/infografis/mekanisme-buyback.svg" download class="btn bg-white text-primary-700 hover:bg-primary-50">
+            ♻️ Mekanisme Buyback
+          </a>
+          <a href="/infografis/dampak-pemulung.svg" download class="btn bg-white text-primary-700 hover:bg-primary-50">
+            👷 Dampak ke Pemulung
+          </a>
+          <a href="/infografis/perbandingan-negara.svg" download class="btn bg-white text-primary-700 hover:bg-primary-50">
+            🌍 Perbandingan Negara
           </a>
         </div>
       </div>

@@ -265,6 +265,103 @@ import Footer from '../components/Footer.astro';
               </p>
             </div>
           </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 6 ? null : 6"
+            >
+              <span class="font-semibold">Kemasan apa saja yang bisa dikembalikan?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 6 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 6" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Semua kemasan dari produsen yang wajib ikut program: botol PET (air mineral, minuman ringan), 
+                botol HDPE (sabun, shampo), kemasan sachet (kopi, deterjen), kemasan snack, cup minuman, 
+                dan kemasan plastik lainnya dari produsen dengan omzet di atas 2,5 miliar per tahun.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 7 ? null : 7"
+            >
+              <span class="font-semibold">Di mana saya bisa mengembalikan kemasan?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 7 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 7" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Collection point bisa berupa: minimarket (Indomaret, Alfamart), supermarket, toko kelontong yang berpartisipasi, 
+                mesin reverse vending (seperti di Jerman), atau langsung ke pemulung dan bank sampah. 
+                Nantinya setiap kemasan akan ada logo yang menunjukkan tempat pengembalian terdekat.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 8 ? null : 8"
+            >
+              <span class="font-semibold">Berapa lama waktu yang dibutuhkan untuk implementasi?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 8 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 8" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Berdasarkan pengalaman negara lain, implementasi penuh membutuhkan 2-3 tahun setelah regulasi disahkan. 
+                Tahap awal bisa dimulai dengan pilot project di kota-kota besar seperti Jakarta, Surabaya, dan Bandung. 
+                Jerman membutuhkan 2 tahun, Korea Selatan 3 tahun untuk mencapai cakupan nasional.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 9 ? null : 9"
+            >
+              <span class="font-semibold">Apakah produsen akan menolak kebijakan ini?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 9 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 9" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Beberapa produsen mungkin awalnya keberatan karena biaya tambahan. Namun, dalam jangka panjang, 
+                produsen justru diuntungkan: (1) Akses ke bahan daur ulang berkualitas dengan harga stabil, 
+                (2) Peningkatan brand image sebagai perusahaan ramah lingkungan, (3) Kepatuhan terhadap tren ESG global, 
+                (4) Penghindaran dari potensi regulasi yang lebih ketat di masa depan.
+              </p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <button 
+              class="w-full text-left flex justify-between items-center"
+              @click="openFaq = openFaq === 10 ? null : 10"
+            >
+              <span class="font-semibold">Bagaimana dengan kemasan yang tidak bisa didaur ulang?</span>
+              <svg class="w-5 h-5 transition-transform" :class="{ 'rotate-180': openFaq === 10 }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="openFaq === 10" x-collapse class="mt-4 text-gray-600">
+              <p>
+                Kebijakan buyback akan mendorong produsen untuk beralih ke kemasan yang bisa didaur ulang. 
+                Kemasan multi-layer yang sulit didaur ulang akan dikenakan biaya buyback lebih tinggi, 
+                sehingga produsen terdorong untuk inovasi kemasan. Untuk kemasan yang belum bisa didaur ulang, 
+                tetap dikumpulkan dan dikelola secara proper (energy recovery atau sanitary landfill).
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
