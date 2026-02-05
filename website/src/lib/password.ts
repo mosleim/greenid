@@ -12,10 +12,11 @@ const ALGORITHM = 'PBKDF2';
 const HASH_ALGORITHM = 'SHA-256';
 
 /**
- * Converts ArrayBuffer to hex string
+ * Converts ArrayBuffer or Uint8Array to hex string
  */
-function bufferToHex(buffer: ArrayBuffer): string {
-  return Array.from(new Uint8Array(buffer))
+function bufferToHex(buffer: ArrayBuffer | Uint8Array): string {
+  const arr = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
+  return Array.from(arr)
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
 }
@@ -59,7 +60,7 @@ async function deriveKey(
   const derivedBits = await crypto.subtle.deriveBits(
     {
       name: ALGORITHM,
-      salt: salt,
+      salt: salt.buffer as ArrayBuffer,
       iterations: ITERATIONS,
       hash: HASH_ALGORITHM,
     },
@@ -137,7 +138,7 @@ export async function verifyPassword(
     const derivedBits = await crypto.subtle.deriveBits(
       {
         name: ALGORITHM,
-        salt: salt,
+        salt: salt.buffer as ArrayBuffer,
         iterations: iterations,
         hash: HASH_ALGORITHM,
       },
