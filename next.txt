@@ -1,4 +1,3 @@
-pindahkan workers code ke luar website.
-dan buat pedoman development agar tidak pernah melenceng dari seluruh kesepakatan techstack kita.
+tambahkan worker deployment ke github action
 
-pastikan tidak error.
+pastikan semua action di trigger manual.

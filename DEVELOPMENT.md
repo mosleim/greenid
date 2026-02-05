@@ -218,16 +218,31 @@ const data = await db.select()
 
 ## 🚀 Deployment
 
-### Website (otomatis via GitHub Actions)
-```bash
-git push origin main
-# GitHub Actions akan auto-deploy ke Cloudflare Pages
-```
+### Semua Deployment via GitHub Actions (Manual Trigger)
 
-### Worker (manual pertama kali)
+1. **Buka GitHub Repository**
+   - Go to Actions tab
+
+2. **Pilih Workflow "Deploy to Cloudflare"**
+
+3. **Klik "Run workflow"**
+
+4. **Pilih opsi deployment:**
+   - ✅ Deploy Website - untuk deploy Astro ke Cloudflare Pages
+   - ✅ Deploy Workers - untuk deploy stats-cron worker
+
+5. **Klik "Run workflow" (hijau)**
+
+### Catatan Penting
+- **TIDAK ada auto-deploy saat push** - semua deployment harus manual
+- Website dan Worker bisa di-deploy secara terpisah
+- Untuk deploy keduanya, centang kedua opsi
+
+### Worker (deploy pertama kali - manual via CLI)
 ```bash
 cd workers/stats-cron
 pnpm install
+npx wrangler login
 npx wrangler secret put TURSO_DATABASE_URL
 npx wrangler secret put TURSO_AUTH_TOKEN
 pnpm deploy
