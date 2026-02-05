@@ -20,24 +20,32 @@ function formatNumber(num: number): string {
   }
   return num.toLocaleString('id-ID');
 }
+
+// Get R2 stats URL from environment
+const statsUrl = import.meta.env.PUBLIC_STATS_URL || 'https://cache.buyback.my.id/stats.json';
 ---
 
-<div class="grid grid-cols-3 gap-4 md:gap-8" x-data="{ 
-  supporters: 0, 
-  impressions: 0, 
-  politicians: 0,
+<div class="grid grid-cols-3 gap-4 md:gap-8" x-data={`{ 
+  supporters: ${supporters}, 
+  impressions: ${impressions}, 
+  politicians: ${politicians},
+  statsUrl: '${statsUrl}',
   async fetchStats() {
     try {
-      const res = await fetch('/api/stats');
+      const res = await fetch(this.statsUrl, { 
+        cache: 'no-store',
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       this.supporters = data.supporters || 0;
-      this.impressions = data.impressions || 0;
+      this.impressions = data.totalImpressions || data.impressions || 0;
       this.politicians = data.politicians || 0;
     } catch (e) {
-      console.error('Failed to fetch stats');
+      console.warn('R2 stats fetch failed, using fallback');
     }
   }
-}" x-init="fetchStats()">
+}`} x-init="fetchStats()">
   
   <div class="text-center">
     <div class="text-3xl md:text-5xl font-display font-bold text-primary-600" x-text="supporters.toLocaleString('id-ID')">
