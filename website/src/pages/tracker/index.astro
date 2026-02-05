@@ -6,21 +6,21 @@ import { db, politicians as politiciansTable, statements as statementsTable } fr
 import { eq, desc, sql } from 'drizzle-orm';
 
 // Get politicians from database with statement counts
-const politiciansData = await db.select({
+const politiciansData = db ? await db.select({
   id: politiciansTable.id,
   slug: politiciansTable.slug,
   name: politiciansTable.name,
   position: politiciansTable.position,
   party: politiciansTable.party,
   photoUrl: politiciansTable.photoUrl,
-}).from(politiciansTable);
+}).from(politiciansTable) : [];
 
 // Get statement counts per politician
-const statementCounts = await db.select({
+const statementCounts = db ? await db.select({
   politicianId: statementsTable.politicianId,
   count: sql<number>`count(*)`,
   latestSentiment: sql<string>`(SELECT sentiment FROM statements WHERE politician_id = ${statementsTable.politicianId} ORDER BY statement_date DESC LIMIT 1)`,
-}).from(statementsTable).groupBy(statementsTable.politicianId);
+}).from(statementsTable).groupBy(statementsTable.politicianId) : [];
 
 // Merge data
 const politicians = politiciansData.map(p => {
@@ -33,7 +33,7 @@ const politicians = politiciansData.map(p => {
 });
 
 // Get recent statements
-const recentStatements = await db.select({
+const recentStatements = db ? await db.select({
   id: statementsTable.id,
   content: statementsTable.content,
   source: statementsTable.source,
@@ -44,7 +44,7 @@ const recentStatements = await db.select({
 }).from(statementsTable)
   .innerJoin(politiciansTable, eq(statementsTable.politicianId, politiciansTable.id))
   .orderBy(desc(statementsTable.statementDate))
-  .limit(5);
+  .limit(5) : [];
 
 // Calculate summary stats
 const proCount = politicians.filter(p => p.latestSentiment === 'pro').length;

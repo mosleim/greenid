@@ -18,7 +18,7 @@ interface InfluencerDisplay {
 }
 
 // Fetch influencers from database
-const influencersData = await db.select().from(influencersTable).orderBy(desc(influencersTable.impactScore));
+const influencersData = db ? await db.select().from(influencersTable).orderBy(desc(influencersTable.impactScore)) : [];
 
 const influencers: InfluencerDisplay[] = influencersData.map(i => ({
   id: i.id.toString(),

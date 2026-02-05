@@ -7,14 +7,16 @@ import { eq, desc } from 'drizzle-orm';
 
 export async function getStaticPaths() {
   // Get all politicians from database
+  if (!db) return [];
+  
   const politiciansData = await db.select().from(politiciansTable);
   
   const paths = await Promise.all(politiciansData.map(async (politician) => {
     // Get statements for this politician
-    const statementsData = await db.select()
+    const statementsData = db ? await db.select()
       .from(statementsTable)
       .where(eq(statementsTable.politicianId, politician.id))
-      .orderBy(desc(statementsTable.statementDate));
+      .orderBy(desc(statementsTable.statementDate)) : [];
     
     return {
       params: { slug: politician.slug },
