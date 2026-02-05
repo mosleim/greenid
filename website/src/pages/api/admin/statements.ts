@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { statements, politicians } from '../../../db/schema';
+import { getDbFromContext, statements, politicians } from '../../../db';
 import { eq } from 'drizzle-orm';
 
 export const prerender = false;
@@ -21,6 +20,7 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const allStatements = await db
       .select({
         id: statements.id,
@@ -61,6 +61,7 @@ export async function POST(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     // Validate required fields
@@ -105,6 +106,7 @@ export async function PUT(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     if (!data.id) {
@@ -157,6 +159,7 @@ export async function DELETE(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const url = new URL(context.request.url);
     const id = url.searchParams.get('id');
     

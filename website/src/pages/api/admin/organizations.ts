@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { organizations } from '../../../db/schema';
+import { getDbFromContext, organizations } from '../../../db';
 import { eq, desc } from 'drizzle-orm';
 
 export const prerender = false;
@@ -21,6 +20,7 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const allOrganizations = await db.select().from(organizations).orderBy(desc(organizations.createdAt));
     return new Response(JSON.stringify(allOrganizations), {
       headers: { 'Content-Type': 'application/json' }
@@ -44,6 +44,7 @@ export async function PUT(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     if (!data.id || !data.status) {
@@ -87,6 +88,7 @@ export async function DELETE(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const url = new URL(context.request.url);
     const id = url.searchParams.get('id');
     

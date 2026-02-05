@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { supporters, influencers, politicians, statements, volunteers, organizations } from '../../../db/schema';
+import { getDbFromContext, supporters, influencers, politicians, statements, volunteers, organizations } from '../../../db';
 import { count } from 'drizzle-orm';
 
 export const prerender = false;
@@ -21,6 +20,8 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
+
     const [
       supportersCount,
       influencersCount,

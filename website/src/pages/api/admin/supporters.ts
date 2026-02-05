@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { supporters } from '../../../db/schema';
+import { getDbFromContext, supporters } from '../../../db';
 import { eq, desc } from 'drizzle-orm';
 
 export const prerender = false;
@@ -21,6 +20,7 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const allSupporters = await db.select().from(supporters).orderBy(desc(supporters.createdAt));
     return new Response(JSON.stringify(allSupporters), {
       headers: { 'Content-Type': 'application/json' }
@@ -44,6 +44,7 @@ export async function DELETE(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const url = new URL(context.request.url);
     const id = url.searchParams.get('id');
     

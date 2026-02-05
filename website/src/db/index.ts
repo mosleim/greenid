@@ -19,6 +19,17 @@ export function createDbConnection(env: { TURSO_DATABASE_URL?: string; TURSO_AUT
   return drizzle(client, { schema });
 }
 
+// Helper to get db from Cloudflare runtime context or fallback to import.meta.env
+export function getDbFromContext(context: { locals: { runtime?: { env?: any } } }) {
+  const runtime = context.locals.runtime as any;
+  const env = runtime?.env || {};
+  
+  return createDbConnection({
+    TURSO_DATABASE_URL: env.TURSO_DATABASE_URL || import.meta.env?.TURSO_DATABASE_URL,
+    TURSO_AUTH_TOKEN: env.TURSO_AUTH_TOKEN || import.meta.env?.TURSO_AUTH_TOKEN,
+  });
+}
+
 // Default db instance for build/prerender context (uses import.meta.env)
 const databaseUrl = import.meta.env?.TURSO_DATABASE_URL || '';
 const authToken = import.meta.env?.TURSO_AUTH_TOKEN || '';

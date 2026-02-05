@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { politicians } from '../../../db/schema';
+import { getDbFromContext, politicians } from '../../../db';
 import { eq } from 'drizzle-orm';
 
 export const prerender = false;
@@ -31,6 +30,7 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const allPoliticians = await db.select().from(politicians).orderBy(politicians.createdAt);
     return new Response(JSON.stringify(allPoliticians), {
       headers: { 'Content-Type': 'application/json' }
@@ -54,6 +54,7 @@ export async function POST(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     const slug = data.slug || generateSlug(data.name);
@@ -100,6 +101,7 @@ export async function PUT(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     if (!data.id) {
@@ -152,6 +154,7 @@ export async function DELETE(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const url = new URL(context.request.url);
     const id = url.searchParams.get('id');
     

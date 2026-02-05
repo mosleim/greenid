@@ -1,6 +1,5 @@
 import type { APIContext } from 'astro';
-import { db } from '../../../db';
-import { influencers } from '../../../db/schema';
+import { getDbFromContext, influencers } from '../../../db';
 import { eq } from 'drizzle-orm';
 
 export const prerender = false;
@@ -21,6 +20,7 @@ export async function GET(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const allInfluencers = await db.select().from(influencers).orderBy(influencers.createdAt);
     return new Response(JSON.stringify(allInfluencers), {
       headers: { 'Content-Type': 'application/json' }
@@ -44,6 +44,7 @@ export async function POST(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     const newInfluencer = await db.insert(influencers).values({
@@ -81,6 +82,7 @@ export async function PUT(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const data = await context.request.json();
     
     if (!data.id) {
@@ -135,6 +137,7 @@ export async function DELETE(context: APIContext) {
   }
 
   try {
+    const db = getDbFromContext(context);
     const url = new URL(context.request.url);
     const id = url.searchParams.get('id');
     
