@@ -1,10 +1,20 @@
 import type { APIRoute } from 'astro';
-import { db, statementReports } from '../../db';
+import { createDbConnection, statementReports } from '../../db';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    // Get env from Cloudflare runtime context
+    const runtime = locals.runtime as any;
+    const env = runtime?.env || {};
+    
+    // Create db connection with runtime env
+    const db = createDbConnection({
+      TURSO_DATABASE_URL: env.TURSO_DATABASE_URL || import.meta.env?.TURSO_DATABASE_URL,
+      TURSO_AUTH_TOKEN: env.TURSO_AUTH_TOKEN || import.meta.env?.TURSO_AUTH_TOKEN,
+    });
+    
     const data = await request.json();
     
     // Validate required fields

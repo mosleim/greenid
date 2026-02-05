@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db, supporters, influencers, politicians, statements } from '../../db';
+import { createDbConnection, supporters, influencers, politicians, statements } from '../../db';
 import { count, sum, sql } from 'drizzle-orm';
 
 export const prerender = false;
@@ -7,7 +7,7 @@ export const prerender = false;
 // R2 Cache URL - stats diupdate oleh worker setiap 5 menit
 const R2_STATS_URL = import.meta.env.PUBLIC_STATS_URL || 'https://cache.buyback.my.id/stats.json';
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ locals }) => {
   try {
     // Coba fetch dari R2 cache terlebih dahulu
     try {
@@ -43,6 +43,16 @@ export const GET: APIRoute = async () => {
     }
 
     // Fallback: Query langsung dari database
+    // Get env from Cloudflare runtime context
+    const runtime = locals.runtime as any;
+    const env = runtime?.env || {};
+    
+    // Create db connection with runtime env
+    const db = createDbConnection({
+      TURSO_DATABASE_URL: env.TURSO_DATABASE_URL || import.meta.env?.TURSO_DATABASE_URL,
+      TURSO_AUTH_TOKEN: env.TURSO_AUTH_TOKEN || import.meta.env?.TURSO_AUTH_TOKEN,
+    });
+    
     // Get supporter count
     const supporterCount = await db
       .select({ count: count() })
