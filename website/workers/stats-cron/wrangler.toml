@@ -1,0 +1,16 @@
+name = "buyback-stats-cron"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Cron trigger setiap 5 menit
+[triggers]
+crons = ["*/5 * * * *"]
+
+# R2 bucket binding
+[[r2_buckets]]
+binding = "BUYBACK_CACHE"
+bucket_name = "buyback-cache"
+
+# Env vars - diset via dashboard atau wrangler secret
+# TURSO_DATABASE_URL
+# TURSO_AUTH_TOKEN

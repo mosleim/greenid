@@ -303,6 +303,80 @@ Laporkan pernyataan pejabat.
 
 ---
 
+## 6. Cloudflare Worker (Stats Cron)
+
+### Deskripsi
+Worker yang berjalan setiap 5 menit untuk mengupdate statistik dari database Turso ke R2 cache.
+
+### Arsitektur
+```
+[Cron Trigger] → [Worker] → [Query Turso] → [Save to R2]
+                              ↓
+[Frontend] → [/api/stats] → [Read from R2 cache]
+                              ↓ (fallback)
+                           [Query Turso directly]
+```
+
+### Konfigurasi yang Dibutuhkan
+
+**Secrets (set via Wrangler atau Dashboard):**
+- `TURSO_DATABASE_URL` - URL database Turso
+- `TURSO_AUTH_TOKEN` - Token autentikasi Turso
+
+**R2 Binding (di wrangler.toml):**
+- `BUYBACK_CACHE` - binding ke bucket `buyback-cache`
+
+### Cara Deploy Worker
+
+1. **Masuk ke folder worker**
+   ```bash
+   cd website/workers/stats-cron
+   pnpm install
+   ```
+
+2. **Login ke Cloudflare (jika belum)**
+   ```bash
+   npx wrangler login
+   ```
+
+3. **Set Secrets**
+   ```bash
+   npx wrangler secret put TURSO_DATABASE_URL
+   # Paste URL database
+
+   npx wrangler secret put TURSO_AUTH_TOKEN
+   # Paste auth token
+   ```
+
+4. **Deploy Worker**
+   ```bash
+   pnpm deploy
+   # atau
+   npx wrangler deploy
+   ```
+
+5. **Verifikasi Cron**
+   - Buka https://dash.cloudflare.com
+   - Workers & Pages > buyback-stats-cron
+   - Klik tab "Triggers"
+   - Pastikan cron `*/5 * * * *` tercantum
+
+### Testing Manual
+```bash
+# Refresh stats (tanpa menunggu cron)
+curl https://buyback-stats-cron.YOUR_SUBDOMAIN.workers.dev/refresh
+
+# Get cached stats
+curl https://buyback-stats-cron.YOUR_SUBDOMAIN.workers.dev/stats
+```
+
+### Monitoring
+- Lihat logs di Cloudflare Dashboard > Workers > Logs
+- Stats otomatis diupdate setiap 5 menit
+- R2 akan menyimpan file `stats.json` di bucket
+
+---
+
 ## Quick Start
 
 ### 1. Clone dan Install

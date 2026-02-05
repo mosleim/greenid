@@ -35,7 +35,7 @@
 - [x] Setup Cloudflare Pages project
 - [x] Setup Cloudflare R2 bucket
 - [x] Setup GitHub Actions untuk deploy
-- [ ] Configure Workers (untuk cron stats)
+- [x] Configure Workers (untuk cron stats)
 
 ### Database Setup
 - [x] Create Turso account
@@ -109,11 +109,11 @@
 
 ### API & Workers
 - [x] POST `/api/support` - submit supporter form
-- [x] GET `/api/stats` - get current stats (fallback)
+- [x] GET `/api/stats` - get current stats (from R2 cache with DB fallback)
 - [x] POST `/api/volunteer` - submit volunteer form
 - [x] POST `/api/organization` - submit organization form
 - [x] POST `/api/report-statement` - submit statement report
-- [ ] Cron worker untuk regenerate stats ke R2
+- [x] Cron worker untuk regenerate stats ke R2
 
 ### Components
 - [x] Header (navigation)
