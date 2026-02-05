@@ -330,7 +330,7 @@ Worker yang berjalan setiap 5 menit untuk mengupdate statistik dari database Tur
 
 1. **Masuk ke folder worker**
    ```bash
-   cd website/workers/stats-cron
+   cd workers/stats-cron
    pnpm install
    ```
 

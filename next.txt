@@ -1,1 +1,4 @@
-buat pedoman development agar tidak pernah melenceng dari kesepakatan kita.
+pindahkan workers code ke luar website.
+dan buat pedoman development agar tidak pernah melenceng dari seluruh kesepakatan techstack kita.
+
+pastikan tidak error.
