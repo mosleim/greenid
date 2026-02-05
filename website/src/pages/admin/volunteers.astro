@@ -81,11 +81,7 @@ if (!sessionCookie) {
                     <select 
                       @change="updateStatus(item.id, $event.target.value)"
                       class="text-sm border rounded px-2 py-1"
-                      :class="{
-                        'bg-yellow-50 border-yellow-300 text-yellow-700': item.status === 'pending',
-                        'bg-green-50 border-green-300 text-green-700': item.status === 'active',
-                        'bg-gray-50 border-gray-300 text-gray-700': item.status === 'inactive'
-                      }">
+                      :class="getStatusClass(item.status)">
                       <option value="pending" :selected="item.status === 'pending'">Pending</option>
                       <option value="active" :selected="item.status === 'active'">Active</option>
                       <option value="inactive" :selected="item.status === 'inactive'">Inactive</option>
@@ -198,6 +194,15 @@ if (!sessionCookie) {
             'organizer': 'Organizer'
           };
           return roles[role] || role;
+        },
+        
+        getStatusClass(status) {
+          var classes = {
+            'pending': 'bg-yellow-50 border-yellow-300 text-yellow-700',
+            'active': 'bg-green-50 border-green-300 text-green-700',
+            'inactive': 'bg-gray-50 border-gray-300 text-gray-700'
+          };
+          return classes[status] || 'bg-gray-50 border-gray-300 text-gray-700';
         },
         
         showDetail(item) {

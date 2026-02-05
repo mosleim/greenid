@@ -84,11 +84,7 @@ if (!sessionCookie) {
                   </td>
                   <td class="p-4">
                     <span class="px-2 py-1 rounded text-xs font-medium"
-                      :class="{
-                        'bg-green-100 text-green-700': item.sentiment === 'pro',
-                        'bg-red-100 text-red-700': item.sentiment === 'kontra',
-                        'bg-gray-100 text-gray-700': item.sentiment === 'netral'
-                      }"
+                      :class="getSentimentClass(item.sentiment)"
                       x-text="item.sentiment"></span>
                   </td>
                   <td class="p-4">
@@ -246,6 +242,15 @@ if (!sessionCookie) {
             month: 'short',
             year: 'numeric'
           });
+        },
+        
+        getSentimentClass(sentiment) {
+          const classes = {
+            'pro': 'bg-green-100 text-green-700',
+            'kontra': 'bg-red-100 text-red-700',
+            'netral': 'bg-gray-100 text-gray-700'
+          };
+          return classes[sentiment] || 'bg-gray-100 text-gray-700';
         },
         
         openModal() {

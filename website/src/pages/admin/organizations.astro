@@ -68,14 +68,7 @@ if (!sessionCookie) {
                   </td>
                   <td class="p-4">
                     <span class="px-2 py-1 rounded text-xs font-medium"
-                      :class="{
-                        'bg-green-100 text-green-700': item.type === 'ngo',
-                        'bg-blue-100 text-blue-700': item.type === 'community',
-                        'bg-purple-100 text-purple-700': item.type === 'company',
-                        'bg-orange-100 text-orange-700': item.type === 'government',
-                        'bg-indigo-100 text-indigo-700': item.type === 'academic',
-                        'bg-pink-100 text-pink-700': item.type === 'media'
-                      }"
+                      :class="getTypeClass(item.type)"
                       x-text="formatType(item.type)"></span>
                   </td>
                   <td class="p-4 text-sm" x-text="item.picName"></td>
@@ -90,11 +83,7 @@ if (!sessionCookie) {
                     <select 
                       @change="updateStatus(item.id, $event.target.value)"
                       class="text-sm border rounded px-2 py-1"
-                      :class="{
-                        'bg-yellow-50 border-yellow-300 text-yellow-700': item.status === 'pending',
-                        'bg-green-50 border-green-300 text-green-700': item.status === 'active',
-                        'bg-gray-50 border-gray-300 text-gray-700': item.status === 'inactive'
-                      }">
+                      :class="getStatusClass(item.status)">
                       <option value="pending" :selected="item.status === 'pending'">Pending</option>
                       <option value="active" :selected="item.status === 'active'">Active</option>
                       <option value="inactive" :selected="item.status === 'inactive'">Inactive</option>
@@ -204,6 +193,27 @@ if (!sessionCookie) {
             'media': 'Media'
           };
           return types[type] || type;
+        },
+        
+        getTypeClass(type) {
+          var classes = {
+            'ngo': 'bg-green-100 text-green-700',
+            'community': 'bg-blue-100 text-blue-700',
+            'company': 'bg-purple-100 text-purple-700',
+            'government': 'bg-orange-100 text-orange-700',
+            'academic': 'bg-indigo-100 text-indigo-700',
+            'media': 'bg-pink-100 text-pink-700'
+          };
+          return classes[type] || 'bg-gray-100 text-gray-700';
+        },
+        
+        getStatusClass(status) {
+          var classes = {
+            'pending': 'bg-yellow-50 border-yellow-300 text-yellow-700',
+            'active': 'bg-green-50 border-green-300 text-green-700',
+            'inactive': 'bg-gray-50 border-gray-300 text-gray-700'
+          };
+          return classes[status] || 'bg-gray-50 border-gray-300 text-gray-700';
         },
         
         showDetail(item) {
