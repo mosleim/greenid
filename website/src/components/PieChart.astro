@@ -1,0 +1,70 @@
+---
+interface Props {
+  id: string;
+  labels: string[];
+  data: number[];
+  label: string;
+  backgroundColor?: string[];
+  borderColor?: string[];
+}
+
+const { 
+  id, 
+  labels, 
+  data, 
+  label,
+  backgroundColor = [
+    'rgba(16, 185, 129, 0.2)',
+    'rgba(239, 68, 68, 0.2)',
+    'rgba(59, 130, 246, 0.2)'
+  ],
+  borderColor = [
+    'rgb(16, 185, 129)',
+    'rgb(239, 68, 68)',
+    'rgb(59, 130, 246)'
+  ]
+} = Astro.props;
+---
+
+<div class="chart-container">
+  <canvas id={id}></canvas>
+</div>
+
+<script define:vars={{ id, labels, data, label, backgroundColor, borderColor }}>
+  import('chart.js/auto').then(({ Chart }) => {
+    const ctx = document.getElementById(id);
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: data,
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'right'
+            }
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+</style>

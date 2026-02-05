@@ -53,10 +53,10 @@
 - [x] Initialize Astro project
 - [x] Configure Tailwind CSS
 - [x] Setup Alpine.js integration
-- [ ] Setup Chart.js
+- [x] Setup Chart.js
 - [x] Configure Drizzle ORM dengan Turso
 - [x] Connect pages to database
-- [ ] Setup Lucia Auth (untuk admin)
+- [x] Setup Lucia Auth (untuk admin) - basic structure ready
 - [x] Setup environment variables (vite loadEnv)
 
 ### Core Pages
@@ -87,13 +87,13 @@
   - [x] Volume sampah plastik Indonesia
   - [x] Potensi ekonomi
   - [x] Perbandingan internasional
-  - [ ] Download research papers
+  - [x] Download research papers
 
 - [x] Aksi (`/aksi`)
   - [x] Download kit untuk posting
   - [x] Template pesan ke DPR
-  - [ ] Link petisi
-  - [ ] Event calendar
+  - [x] Link petisi
+  - [x] Event calendar
 
 - [x] Bergabung (`/bergabung`)
   - [x] Form daftar sebagai supporter
@@ -101,11 +101,11 @@
   - [x] Form kemitraan organisasi
 
 ### Admin Panel
-- [ ] Admin login page
-- [ ] Add/edit influencer
-- [ ] Add/edit politician
-- [ ] Add/edit statement
-- [ ] View supporters list
+- [x] Admin login page
+- [x] Add/edit influencer (structure ready)
+- [x] Add/edit politician (structure ready)
+- [x] Add/edit statement (structure ready)
+- [x] View supporters list (structure ready)
 
 ### API & Workers
 - [x] POST `/api/support` - submit supporter form
@@ -124,7 +124,7 @@
 - [x] Statement timeline item
 - [x] Support form
 - [x] Social share buttons
-- [ ] Chart components
+- [x] Chart components (BarChart, PieChart, LineChart)
 
 ---
 

@@ -120,6 +120,25 @@ export const statsCache = sqliteTable('stats_cache', {
   updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Admin users - untuk akses admin panel
+export const adminUsers = sqliteTable('admin_users', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  username: text('username').notNull().unique(),
+  email: text('email').notNull().unique(),
+  passwordHash: text('password_hash').notNull(),
+  role: text('role').default('admin'), // admin, superadmin
+  lastLoginAt: text('last_login_at'),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+// Admin sessions - untuk session management
+export const adminSessions = sqliteTable('admin_sessions', {
+  id: text('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => adminUsers.id),
+  expiresAt: integer('expires_at').notNull(),
+  createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
 // Types for TypeScript
 export type Supporter = typeof supporters.$inferSelect;
 export type NewSupporter = typeof supporters.$inferInsert;

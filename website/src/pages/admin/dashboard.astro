@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = false;
+
+// Basic auth check - will be enhanced later
+const sessionCookie = Astro.cookies.get('admin_session');
+if (!sessionCookie) {
+  return Astro.redirect('/admin');
+}
+---
+
+<BaseLayout title="Admin Dashboard">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Admin Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="container-wide py-4">
+        <div class="flex items-center justify-between">
+          <h1 class="font-display text-2xl font-bold text-gray-900">
+            Admin Dashboard
+          </h1>
+          <div class="flex items-center gap-4">
+            <a href="/" target="_blank" class="text-sm text-gray-600 hover:text-primary-600">
+              Lihat Website →
+            </a>
+            <form action="/api/admin/logout" method="POST">
+              <button type="submit" class="btn btn-secondary text-sm">
+                Logout
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="container-wide py-8">
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="card">
+          <div class="text-sm text-gray-600 mb-1">Supporters</div>
+          <div class="font-display text-3xl font-bold text-primary-600">-</div>
+        </div>
+        <div class="card">
+          <div class="text-sm text-gray-600 mb-1">Influencers</div>
+          <div class="font-display text-3xl font-bold text-primary-600">-</div>
+        </div>
+        <div class="card">
+          <div class="text-sm text-gray-600 mb-1">Politicians</div>
+          <div class="font-display text-3xl font-bold text-primary-600">-</div>
+        </div>
+        <div class="card">
+          <div class="text-sm text-gray-600 mb-1">Statements</div>
+          <div class="font-display text-3xl font-bold text-primary-600">-</div>
+        </div>
+      </div>
+      
+      <!-- Management Sections -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="/admin/influencers" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">📸</div>
+          <h2 class="font-semibold text-lg mb-2">Kelola Influencer</h2>
+          <p class="text-sm text-gray-600 mb-4">Tambah, edit, atau hapus data influencer</p>
+          <span class="text-primary-600 text-sm font-medium">Kelola →</span>
+        </a>
+        
+        <a href="/admin/politicians" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">🏛️</div>
+          <h2 class="font-semibold text-lg mb-2">Kelola Politisi</h2>
+          <p class="text-sm text-gray-600 mb-4">Tambah, edit, atau hapus data politisi</p>
+          <span class="text-primary-600 text-sm font-medium">Kelola →</span>
+        </a>
+        
+        <a href="/admin/statements" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">💬</div>
+          <h2 class="font-semibold text-lg mb-2">Kelola Pernyataan</h2>
+          <p class="text-sm text-gray-600 mb-4">Tambah, edit, atau hapus pernyataan politisi</p>
+          <span class="text-primary-600 text-sm font-medium">Kelola →</span>
+        </a>
+        
+        <a href="/admin/supporters" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">👥</div>
+          <h2 class="font-semibold text-lg mb-2">Lihat Supporters</h2>
+          <p class="text-sm text-gray-600 mb-4">Daftar orang yang mendukung kampanye</p>
+          <span class="text-primary-600 text-sm font-medium">Lihat →</span>
+        </a>
+        
+        <a href="/admin/volunteers" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">✊</div>
+          <h2 class="font-semibold text-lg mb-2">Lihat Volunteers</h2>
+          <p class="text-sm text-gray-600 mb-4">Daftar calon relawan yang mendaftar</p>
+          <span class="text-primary-600 text-sm font-medium">Lihat →</span>
+        </a>
+        
+        <a href="/admin/organizations" class="card hover:shadow-lg transition-shadow">
+          <div class="text-3xl mb-3">🏢</div>
+          <h2 class="font-semibold text-lg mb-2">Lihat Organisasi</h2>
+          <p class="text-sm text-gray-600 mb-4">Daftar organisasi yang ingin bermitra</p>
+          <span class="text-primary-600 text-sm font-medium">Lihat →</span>
+        </a>
+      </div>
+      
+      <!-- Coming Soon Notice -->
+      <div class="card bg-yellow-50 border-yellow-200 mt-8">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Admin Panel Dalam Pengembangan</h3>
+            <p class="text-sm text-gray-700">
+              Fitur lengkap admin panel (CRUD operations) sedang dalam pengembangan. 
+              Saat ini, data dapat dikelola melalui database secara langsung atau melalui API endpoints.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>

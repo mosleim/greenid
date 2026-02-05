@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BarChart from '../components/BarChart.astro';
+import PieChart from '../components/PieChart.astro';
+import LineChart from '../components/LineChart.astro';
 
 // Mock statistics - akan diganti dengan data dari R2 cache
 const stats = {
@@ -117,45 +120,28 @@ function formatNumber(num: number) {
           <!-- Monthly Trend Chart -->
           <div class="card">
             <h3 class="font-semibold text-lg mb-4">Volume Daur Ulang Bulanan</h3>
-            <div class="h-64 flex items-end justify-between gap-2 px-4">
-              {monthlyData.map(item => {
-                const maxRecycled = Math.max(...monthlyData.map(d => d.recycled));
-                const heightPercent = (item.recycled / maxRecycled) * 100;
-                
-                return (
-                  <div class="flex flex-col items-center flex-1">
-                    <div 
-                      class="w-full bg-primary-500 rounded-t-lg transition-all hover:bg-primary-600" 
-                      style={`height: ${heightPercent}%`}
-                      title={`${formatNumber(item.recycled)} kg`}
-                    />
-                    <span class="text-xs text-gray-600 mt-2">{item.month}</span>
-                  </div>
-                );
-              })}
-            </div>
+            <BarChart 
+              id="monthlyTrendChart"
+              labels={monthlyData.map(d => d.month)}
+              data={monthlyData.map(d => d.recycled)}
+              label="Volume (kg)"
+              backgroundColor="rgba(16, 185, 129, 0.5)"
+              borderColor="rgb(16, 185, 129)"
+            />
             <p class="text-xs text-gray-500 mt-4 text-center">Data simulasi untuk demonstrasi</p>
           </div>
           
           <!-- Composition Chart -->
           <div class="card">
             <h3 class="font-semibold text-lg mb-4">Komposisi Sampah Plastik</h3>
-            <div class="space-y-3">
-              {wasteComposition.map(item => (
-                <div>
-                  <div class="flex justify-between text-sm mb-1">
-                    <span>{item.type}</span>
-                    <span class="font-medium">{item.percentage}%</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div 
-                      class="h-3 rounded-full transition-all" 
-                      style={`width: ${item.percentage}%; background-color: ${item.color}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PieChart 
+              id="wasteCompositionChart"
+              labels={wasteComposition.map(w => w.type)}
+              data={wasteComposition.map(w => w.percentage)}
+              label="Persentase"
+              backgroundColor={wasteComposition.map(w => w.color + '33')}
+              borderColor={wasteComposition.map(w => w.color)}
+            />
           </div>
         </div>
       </div>

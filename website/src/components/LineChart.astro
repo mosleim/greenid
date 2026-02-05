@@ -1,0 +1,63 @@
+---
+interface Props {
+  id: string;
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    borderColor?: string;
+    backgroundColor?: string;
+    tension?: number;
+  }[];
+}
+
+const { id, labels, datasets } = Astro.props;
+---
+
+<div class="chart-container">
+  <canvas id={id}></canvas>
+</div>
+
+<script define:vars={{ id, labels, datasets }}>
+  import('chart.js/auto').then(({ Chart }) => {
+    const ctx = document.getElementById(id);
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: datasets.map(ds => ({
+            label: ds.label,
+            data: ds.data,
+            borderColor: ds.borderColor || 'rgb(16, 185, 129)',
+            backgroundColor: ds.backgroundColor || 'rgba(16, 185, 129, 0.1)',
+            tension: ds.tension || 0.4
+          }))
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+</style>
