@@ -41,6 +41,7 @@
 - [x] Create Turso account
 - [x] Create database `buyback-db`
 - [x] Generate auth token
+- [x] Create database schema (Drizzle ORM)
 - [ ] Run schema migrations
 - [ ] Seed initial data (jika ada)
 
@@ -53,7 +54,7 @@
 - [x] Configure Tailwind CSS
 - [x] Setup Alpine.js integration
 - [ ] Setup Chart.js
-- [ ] Configure Drizzle ORM dengan Turso
+- [x] Configure Drizzle ORM dengan Turso
 - [ ] Setup Lucia Auth (untuk admin)
 - [ ] Setup environment variables
 
@@ -106,8 +107,11 @@
 - [ ] View supporters list
 
 ### API & Workers
-- [ ] POST `/api/support` - submit supporter form
-- [ ] GET `/api/stats` - get current stats (fallback)
+- [x] POST `/api/support` - submit supporter form
+- [x] GET `/api/stats` - get current stats (fallback)
+- [x] POST `/api/volunteer` - submit volunteer form
+- [x] POST `/api/organization` - submit organization form
+- [x] POST `/api/report-statement` - submit statement report
 - [ ] Cron worker untuk regenerate stats ke R2
 
 ### Components
